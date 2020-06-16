@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>一、确认本机上是否安装蓝牙 | Hexo</title>
+  <title>var  selected_device ;  !--保存用户选择的蓝牙设备-- | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="北音执念">
   <meta name="keywords" content="">
@@ -70,7 +70,7 @@
   <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
     <span>2020-06-16</span>
-    <h2>一、确认本机上是否安装蓝牙</h2>
+    <h2>var  selecte...</h2>
     
     </div>
 </div>
@@ -80,19 +80,35 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <p>一、确认本机上是否安装蓝牙</p>
-<p>●法-:在桌面开始按钮旁的搜索栏中输入bluetooth后回车, 看蓝牙是否打开。</p>
-<p>●法二:在chrome浏览器的地址栏中输入chr ome://bluetooth-internals，看是否能发现周边蓝牙设备。上述网址是一个Chrome浏览器的插件, 使用它可以查看电脑周边蓝牙设备的信息:状态、服务、特性、描述符等。</p>
-<p>二、检查本机系统、chrome 浏览器的版本</p>
-<p>，Chrome的70.0.3526.0及以上。</p>
-<p>窗口关闭按钮的下方-&gt;帮助&gt;关于Google Chrome</p>
-<p>●Windows 10的1703及以上。</p>
-<p>在桌面开始按钮旁的搜索栏中输入winver回车即可查看本机的版本号。注意，在MSDN网站上可以查看/下载Windows.系统的历史版本。</p>
-<p>请注意:网页蓝牙功能并非只有Chrome浏览器支持，其他如Firefox、Safari也都可以。 但网页蓝牙的API及内部实现都是Chrome团队在开发，因此Chrome对该功能支持的最好。不同浏览器对网页蓝牙的实现及支持现状请看这里。</p>
-<p>三、下载固件至开发板</p>
-<p>如果microbit开发板要和我们电脑通过蓝牙来通信,则需要通过程序来启用板子上的蓝牙模块。因此需要下载能够实现该功能的固件，点击这里下载。</p>
-<p>四、测试</p>
-<p>在chr ome浏览器的地址栏中输入chr ome://bluetooth-internals,进入Devices后选择Name为BBCmicro:bit [gitup]的一 -行。若板子上显示字符C,则表示电脑端和板子端正常运行。</p>
+        <p>var  selected_device ;  //<!--保存用户选择的蓝牙设备--></p>
+<p>   var  connected_server;  //在第二节课基础上添加的变量，保存电脑当前蓝牙连接状态</p>
+<p>   var  connected = false;</p>
+<p>   var services_discovered = false;//5接课</p>
+<p>   //5接课</p>
+<p>   //presence of services and characteristics</p>
+<p>   var has_accelerometer_service = false;</p>
+<p>   var has_accelerometer_data = false;</p>
+<p>   var has_led_matrix_state = false;</p>
+<p>   var has_led_matrix_state = false;</p>
+<p>   var has_device_information_service = false;</p>
+<p>   var has_model_number_string = false;</p>
+<p>   //servicers UUIDs</p>
+<p>   ACCELEROMETER_SERVICE = ‘e95d0753-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   LED_SERVICE = ‘e95dd91d-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   DEVICE_INFORMATION_SERVICE = ‘0000180a-0000-1000-8000-00805f9b34fb’;</p>
+<p>   //characteristics UUIDs</p>
+<p>   ACCELEROMETER_DATA = ‘e95dca4b-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   LED_MATRIX_STATE = ‘e95dd91d-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   MODEL_NUMBER_STRING = ‘00002a24-0000-1000-8000-00805f9b34fb’;</p>
+<p>   //cached characteristics</p>
+<p>   var led_matrix_state</p>
+<p>   var model_number_string;</p>
+<p>   var accelerometer_data;</p>
+<p>   //</p>
+<p>   var service_count;</p>
+<p>   var services_discovered;</p>
+<p>   var characteristic_count;</p>
+<p>   var characteristics_discovered;</p>
 
       </div>
     </div>
@@ -101,12 +117,12 @@
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/">
+		<a class="copy" href="/2020/06/16/function%20discoverOrdisconnectDevices()%E7%AC%AC%E5%9B%9B%E8%8A%82%E8%AF%BE/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>项目二</h3>
+						<h3>functio...</h3>
 					</div>
 				</div>
 			</div>
@@ -114,12 +130,12 @@
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/04/03/%E5%AE%89%E8%A3%85hexo/">
+		<a class="copy" href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>安装hexo</h3>
+						<h3>项目二</h3>
 					</div>
 				</div>
 			</div>

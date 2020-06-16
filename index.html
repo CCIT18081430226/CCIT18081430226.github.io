@@ -81,6 +81,559 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/06/16/h2Statush2%20!--%E6%98%BE%E7%A4%BA%E8%93%9D%E7%89%99%E7%8A%B6%E6%80%81--/">h2Statush2 !--显示蓝牙状态--</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><p>h2&gt;Status</h2> <!--显示蓝牙状态--></p>
+<table border="1">
+
+ <tr>
+
+  <td> <b>Connected</b></td>
+
+  <td><b>Service Discovery Completed</b></td>
+
+ </tr><!--表格第一行-->
+
+ <tr>
+
+  <td id="Status_connected"> false </td>
+
+  <td id="Status_discovered"> false </td>
+
+ </tr><!--表格第二行-->
+
+</table>
+
+<h2>Device Discovery</h2><!--扫描/发现蓝牙设备-->
+
+
+
+<p><button id="btn_scan" onclick="discoverDevices()">Start scan</button></p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/h2Statush2%20!--%E6%98%BE%E7%A4%BA%E8%93%9D%E7%89%99%E7%8A%B6%E6%80%81--/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/06/16/function%20setConnectedStatus(Status)%20%E7%AC%AC%E4%B8%89%E8%8A%82%E8%AF%BE%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AE%BE%E7%BD%AE%E7%94%B5%E8%84%91%E8%93%9D%E7%89%99%E5%BD%93%E5%89%8D%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81/">function setConnectedStatus(Status) 第三节课添加函数，设置电脑蓝牙当前连接状态</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><p>function setConnectedStatus(Status) //第三节课添加函数，设置电脑蓝牙当前连接状态</p>
+<p>   {</p>
+<p>​    connect = status;</p>
+<p>​    document.getElementById(‘status_connected’).innerHTML = status;</p>
+<p>​    if(status==true)</p>
+<p>​    {</p>
+<p>​     document.getElementById(‘btn_scan’).innerHTML = “Disconnect”;</p>
+<p>​    }</p>
+<p>​    else</p>
+<p>​    {</p>
+<p>​     document.getElementById(‘btn_scan’).innerHTML=”Discover Devices”;</p>
+<p>​    }</p>
+<p>   }</p>
+<p>   function setDiscoveryStatus(status)</p>
+<p>   {</p>
+<p>​    services_discovered = status;</p>
+<p>​    document.getElementById(‘status.discovered’).innerHTML = status;</p>
+<p>   }</p>
+<p>   function resetUI()//第四节课基础上添加函数</p>
+<p>   {</p>
+<p>​    setConnectedStatus(false);</p>
+<p>​    setConnectedStatus(false);//第五节课基础上添加函数</p>
+<p>   }</p>
+<p>   function discoverSvcsAndChars()//第五节课添加函数</p>
+<p>   {</p>
+<p>​     console.log(“discoverSvcsAndChars server= “ + connected_server);</p>
+<p>​     connected_server.getPrimaryServices()</p>
+<p>​     .then(services =&gt;</p>
+<p>​     {</p>
+<p>​      has_accelerometer_service = false;</p>
+<p>​      has_led_service = false;</p>
+<p>​      has_device_information_service = false;</p>
+<p>​      services_discovered = 0;</p>
+<p>​      service_count = services.length;</p>
+<p>​      console.log(“Got” + service_count + “services”);</p>
+<p>​      services.forEach(service =&gt; {</p>
+<p>​       if(service.uuid == ACCELEROMETER_SERVICE)</p>
+<p>​       {</p>
+<p>​       has_accelerometer_service = true;</p>
+<p>​       }</p>
+<p>​       if(service.uuid == LED_SERVICE)</p>
+<p>​       {</p>
+<p>​       has_led_service = true;</p>
+<p>​       }</p>
+<p>​       if(service.uuid == DEVICE_INFORMATION_SERVICE)</p>
+<p>​       {</p>
+<p>​       has_device_information_service = true;</p>
+<p>​       }</p>
+<p>​       console.log(‘Getting Characteristics for servicer’ + service.uuid);</p>
+<p>​       service.getCharacteristics()</p>
+<p>​       .then(getCharacteristics =&gt;</p>
+<p>​       {</p>
+<p>​        console.log(‘&gt; Service:’ + service.uuid);</p>
+<p>​        services_discovered++;</p>
+<p>​        Characteristics_discovered = 0;</p>
+<p>​        Characteristic_count = Characteristic.length;</p>
+<p>​        Characteristics.forEach(characteristics =&gt;</p>
+<p>​        {</p>
+<p>​        characteristics_discovered++;</p>
+<p>​        console.log(‘&gt;&gt; Characteristics:’ + characteristics.uuid);</p>
+<p>​        if(characteristics.uuid == ACCELEROMETER_DATA)</p>
+<p>​        {</p>
+<p>​         accelerometer_data = characteristics;</p>
+<p>​         has_accelerometer_data = true;</p>
+<p>​        }</p>
+<p>​        if(characteristics.uuid == LED_MATRIX_STATE)</p>
+<p>​        {</p>
+<p>​         led_matrix_state = characteristics;</p>
+<p>​         has_led_matrix_state = true;</p>
+<p>​        }</p>
+<p>​        if(characteristics.uuid == MODEL_NUMBER_STRING)</p>
+<p>​        {</p>
+<p>​         model_number_string= characteristics;</p>
+<p>​         has_model_number_string = true;</p>
+<p>​        }</p>
+<p>​        if(services_discovered == service_count&amp;&amp;characteristics_discovered == characteristic_count)</p>
+<p>​        {</p>
+<p>​         console.log(“FINISHED DISCOVERY”);</p>
+<p>​         setDiscoveryStatus(true);</p>
+<p>​         //setDiscoveryStatus(true);</p>
+<p>​        }</p>
+<p>​        }</p>
+<p>​        )</p>
+<p>​       }</p>
+<p>​       )</p>
+<p>​      });</p>
+<p>​     }</p>
+<p>​     )</p>
+<p>   }</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/function%20setConnectedStatus(Status)%20%E7%AC%AC%E4%B8%89%E8%8A%82%E8%AF%BE%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AE%BE%E7%BD%AE%E7%94%B5%E8%84%91%E8%93%9D%E7%89%99%E5%BD%93%E5%89%8D%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/06/16/function%20discoverOrdisconnectDevices()%E7%AC%AC%E5%9B%9B%E8%8A%82%E8%AF%BE/">function discoverOrdisconnectDevices()第四节课</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><p>function discoverOrdisconnectDevices()//第四节课</p>
+<p>   {</p>
+<p>​    console.log(“discoverOrdisconnectDevices”);</p>
+<p>​    if(!connected)</p>
+<p>​    {</p>
+<p>​     discoverDevices();</p>
+<p>​    }</p>
+<p>​    else</p>
+<p>​    {</p>
+<p>​     selected_device.gatt.disconnect();//断开连接</p>
+<p>​    }</p>
+<p>   }</p>
+<p>   function onDisconnected()//4课</p>
+<p>   {</p>
+<p>​    console.log(“onDisconnected”);</p>
+<p>​    resetUI();</p>
+<p>   }</p>
+<p>  function discoverDevices()</p>
+<p>   { </p>
+<p>​    console.log(“discoverDevices”);//<!--console，log控制台打印输出--></p>
+<p>​    var options = {acceptAllDevices:true}</p>
+<p>​    navigator.bluetooth.requestDevice(options)</p>
+<p>​    .then(device =&gt; {</p>
+<p>​      console.log(‘&gt; Name:’ + device.name);</p>
+<p>​      console.log(‘&gt; Id:’ + device.id); </p>
+<p>​      console.log(‘&gt; Connected:’ + device.gatt.connected);</p>
+<p>​      selected_device=device;</p>
+<p>​      console.log(selected_device);</p>
+<p>​      connect();</p>
+<p>​     })</p>
+<p>​    .catch(error =&gt; {</p>
+<p>​      alert(‘ERROR ‘ + error);</p>
+<p>​      console.log(‘ERROR:’ + error);</p>
+<p>​       });</p>
+<p>   }</p>
+<p>   function connect()///第二节课添加函数</p>
+<p>   { </p>
+<p>​    console.log(“connecting”);</p>
+<p>​    selected_device.gatt.connect()</p>
+<p>​    .then(</p>
+<p>​        function(server) //表示连接成功</p>
+<p>​        {</p>
+<p>​         console.log(“Connected to” + server.device.id);</p>
+<p>​         console.log(“Connected=” + server.connected);</p>
+<p>​         selected_device.addEventListener(‘gattserverdisconnected’,onDisconnected);</p>
+<p>​         connected_server=server;</p>
+<p>​         discoverSvcsAndChars();//第5节课添加函数</p>
+<p>​         setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态</p>
+<p>​        },</p>
+<p>​        function(error)//表示连接失败</p>
+<p>​        {</p>
+<p>​         console.log(“ERROR:could not connct-“ + error);</p>
+<p>​         alert(“ERROR:could not connct-“ + error);</p>
+<p>​         setConnectedStatus(false);</p>
+<p>​        }</p>
+<p>​       );</p>
+<p>   }</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/function%20discoverOrdisconnectDevices()%E7%AC%AC%E5%9B%9B%E8%8A%82%E8%AF%BE/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/06/16/var%20%20selected_device%20;%20%20!--%E4%BF%9D%E5%AD%98%E7%94%A8%E6%88%B7%E9%80%89%E6%8B%A9%E7%9A%84%E8%93%9D%E7%89%99%E8%AE%BE%E5%A4%87--/">var  selected_device ;  !--保存用户选择的蓝牙设备--</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><p>var  selected_device ;  //<!--保存用户选择的蓝牙设备--></p>
+<p>   var  connected_server;  //在第二节课基础上添加的变量，保存电脑当前蓝牙连接状态</p>
+<p>   var  connected = false;</p>
+<p>   var services_discovered = false;//5接课</p>
+<p>   //5接课</p>
+<p>   //presence of services and characteristics</p>
+<p>   var has_accelerometer_service = false;</p>
+<p>   var has_accelerometer_data = false;</p>
+<p>   var has_led_matrix_state = false;</p>
+<p>   var has_led_matrix_state = false;</p>
+<p>   var has_device_information_service = false;</p>
+<p>   var has_model_number_string = false;</p>
+<p>   //servicers UUIDs</p>
+<p>   ACCELEROMETER_SERVICE = ‘e95d0753-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   LED_SERVICE = ‘e95dd91d-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   DEVICE_INFORMATION_SERVICE = ‘0000180a-0000-1000-8000-00805f9b34fb’;</p>
+<p>   //characteristics UUIDs</p>
+<p>   ACCELEROMETER_DATA = ‘e95dca4b-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   LED_MATRIX_STATE = ‘e95dd91d-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   MODEL_NUMBER_STRING = ‘00002a24-0000-1000-8000-00805f9b34fb’;</p>
+<p>   //cached characteristics</p>
+<p>   var led_matrix_state</p>
+<p>   var model_number_string;</p>
+<p>   var accelerometer_data;</p>
+<p>   //</p>
+<p>   var service_count;</p>
+<p>   var services_discovered;</p>
+<p>   var characteristic_count;</p>
+<p>   var characteristics_discovered;</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/var%20%20selected_device%20;%20%20!--%E4%BF%9D%E5%AD%98%E7%94%A8%E6%88%B7%E9%80%89%E6%8B%A9%E7%9A%84%E8%93%9D%E7%89%99%E8%AE%BE%E5%A4%87--/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/">项目二</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><!DOCTYPE html>
+<html>
+<head><!--用于定义文档的头部，描述了文档各种属性和信息-->
+  <script>
+     var   selected_device ;   //<!--保存用户选择的蓝牙设备-->
+     var   connected_server;   //在第二节课基础上添加的变量，保存电脑当前蓝牙连接状态
+     var   connected = false;
+     var services_discovered = false;//5接课
+     //5接课
+     //presence of services and characteristics
+     var has_accelerometer_service = false;
+     var has_accelerometer_data = false;
+     var has_led_matrix_state = false;
+     var has_led_matrix_state = false;
+     var has_device_information_service = false;
+     var has_model_number_string = false;
+     //servicers UUIDs
+     ACCELEROMETER_SERVICE = 'e95d0753-251d-470a-a062-fa1922dfa9a8';
+     LED_SERVICE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     DEVICE_INFORMATION_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb';
+     //characteristics UUIDs
+     ACCELEROMETER_DATA = 'e95dca4b-251d-470a-a062-fa1922dfa9a8';
+     LED_MATRIX_STATE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     MODEL_NUMBER_STRING = '00002a24-0000-1000-8000-00805f9b34fb';
+     //cached characteristics
+     var led_matrix_state
+     var model_number_string;
+     var accelerometer_data;
+     //
+     var service_count;
+     var services_discovered;
+     var characteristic_count;
+     var characteristics_discovered;
+
+<pre><code> &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;!--用于定义文档的头部，描述了文档各种属性和信息--&gt;
+  &lt;script&gt;
+     var   selected_device ;   //&lt;!--保存用户选择的蓝牙设备--&gt;
+     var   connected_server;   //在第二节课基础上添加的变量，保存电脑当前蓝牙连接状态
+     var   connected = false;
+     var services_discovered = false;//5接课
+     //5接课
+     //presence of services and characteristics
+     var has_accelerometer_service = false;
+     var has_accelerometer_data = false;
+     var has_led_matrix_state = false;
+     var has_led_matrix_state = false;
+     var has_device_information_service = false;
+     var has_model_number_string = false;
+     //servicers UUIDs
+     ACCELEROMETER_SERVICE = &apos;e95d0753-251d-470a-a062-fa1922dfa9a8&apos;;
+     LED_SERVICE = &apos;e95dd91d-251d-470a-a062-fa1922dfa9a8&apos;;
+     DEVICE_INFORMATION_SERVICE = &apos;0000180a-0000-1000-8000-00805f9b34fb&apos;;
+     //characteristics UUIDs
+     ACCELEROMETER_DATA = &apos;e95dca4b-251d-470a-a062-fa1922dfa9a8&apos;;
+     LED_MATRIX_STATE = &apos;e95dd91d-251d-470a-a062-fa1922dfa9a8&apos;;
+     MODEL_NUMBER_STRING = &apos;00002a24-0000-1000-8000-00805f9b34fb&apos;;
+     //cached characteristics
+     var led_matrix_state
+     var model_number_string;
+     var accelerometer_data;
+     //
+     var service_count;
+     var services_discovered;
+     var characteristic_count;
+     var characteristics_discovered;
+
+     function discoverOrdisconnectDevices()//第四节课
+     {
+       console.log(&quot;discoverOrdisconnectDevices&quot;);
+       if(!connected)
+       {
+         discoverDevices();
+       }
+       else
+       {
+         selected_device.gatt.disconnect();//断开连接
+       }
+     }
+
+     function onDisconnected()//4课
+     {
+       console.log(&quot;onDisconnected&quot;);
+       resetUI();
+     }
+
+     function discoverDevices()
+     {  
+        console.log(&quot;discoverDevices&quot;);//&lt;!--console，log控制台打印输出--&gt;
+        var options = {acceptAllDevices:true}
+        navigator.bluetooth.requestDevice(options)
+        .then(device =&gt; {
+            console.log(&apos;&gt; Name:&apos; + device.name);
+            console.log(&apos;&gt; Id:&apos; + device.id);  
+            console.log(&apos;&gt; Connected:&apos; + device.gatt.connected);
+            selected_device=device;
+            console.log(selected_device);
+            connect();
+         })
+        .catch(error =&gt; {
+            alert(&apos;ERROR &apos; + error);
+            console.log(&apos;ERROR:&apos; + error);
+             });
+     }
+     function connect()///第二节课添加函数
+     { 
+       console.log(&quot;connecting&quot;);
+       selected_device.gatt.connect()
+       .then(
+                function(server) //表示连接成功
+                {
+                  console.log(&quot;Connected to&quot; + server.device.id);
+                  console.log(&quot;Connected=&quot; + server.connected);
+                  selected_device.addEventListener(&apos;gattserverdisconnected&apos;,onDisconnected);
+
+                  connected_server=server;
+                  discoverSvcsAndChars();//第5节课添加函数
+                  setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
+                },
+               function(error)//表示连接失败
+               {
+                 console.log(&quot;ERROR:could not connct-&quot; + error);
+                 alert(&quot;ERROR:could not connct-&quot; + error);
+                 setConnectedStatus(false);
+               }
+              );
+     }
+
+     function setConnectedStatus(Status)  //第三节课添加函数，设置电脑蓝牙当前连接状态
+     {
+       connect = status;
+       document.getElementById(&apos;status_connected&apos;).innerHTML = status;
+       if(status==true)
+       {
+          document.getElementById(&apos;btn_scan&apos;).innerHTML = &quot;Disconnect&quot;;
+       }
+       else
+       {
+          document.getElementById(&apos;btn_scan&apos;).innerHTML=&quot;Discover Devices&quot;;
+       }
+     }
+
+
+     function setDiscoveryStatus(status)
+     {
+       services_discovered = status;
+       document.getElementById(&apos;status.discovered&apos;).innerHTML = status;
+     }
+
+ function onDisconnected()//4课
+     {
+       console.log(&quot;onDisconnected&quot;);
+       resetUI();
+     }
+
+     function discoverDevices()
+     {  
+        console.log(&quot;discoverDevices&quot;);//&lt;!--console，log控制台打印输出--&gt;
+        var options = {acceptAllDevices:true}
+        navigator.bluetooth.requestDevice(options)
+        .then(device =&gt; {
+            console.log(&apos;&gt; Name:&apos; + device.name);
+            console.log(&apos;&gt; Id:&apos; + device.id);  
+            console.log(&apos;&gt; Connected:&apos; + device.gatt.connected);
+            selected_device=device;
+            console.log(selected_device);
+            connect();
+         })
+        .catch(error =&gt; {
+            alert(&apos;ERROR &apos; + error);
+            console.log(&apos;ERROR:&apos; + error);
+             });
+     }
+     function connect()///第二节课添加函数
+     { 
+       console.log(&quot;connecting&quot;);
+       selected_device.gatt.connect()
+       .then(
+                function(server) //表示连接成功
+                {
+                  console.log(&quot;Connected to&quot; + server.device.id);
+                  console.log(&quot;Connected=&quot; + server.connected);
+                  selected_device.addEventListener(&apos;gattserverdisconnected&apos;,onDisconnected);
+
+                  connected_server=server;
+                  discoverSvcsAndChars();//第5节课添加函数
+                  setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
+                },
+               function(error)//表示连接失败
+               {
+                 console.log(&quot;ERROR:could not connct-&quot; + error);
+                 alert(&quot;ERROR:could not connct-&quot; + error);
+                 setConnectedStatus(false);
+               }
+              );
+     }
+
+     function setConnectedStatus(Status)  //第三节课添加函数，设置电脑蓝牙当前连接状态
+     {
+       connect = status;
+       document.getElementById(&apos;status_connected&apos;).innerHTML = status;
+       if(status==true)
+       {
+          document.getElementById(&apos;btn_scan&apos;).innerHTML = &quot;Disconnect&quot;;
+       }
+       else
+       {
+          document.getElementById(&apos;btn_scan&apos;).innerHTML=&quot;Discover Devices&quot;;
+       }
+     }
+
+
+     function setDiscoveryStatus(status)
+     {
+       services_discovered = status;
+       document.getElementById(&apos;status.discovered&apos;).innerHTML = status;
+     }
+
+     function resetUI()//第四节课基础上添加函数
+     {
+       setConnectedStatus(false);
+       setConnectedStatus(false);//第五节课基础上添加函数
+     }
+
+     function discoverSvcsAndChars()//第五节课添加函数
+     {
+         console.log(&quot;discoverSvcsAndChars server= &quot; + connected_server);
+         connected_server.getPrimaryServices()
+         .then(services =&gt;
+         {
+           has_accelerometer_service = false;
+           has_led_service = false;
+           has_device_information_service = false;
+
+           services_discovered = 0;
+           service_count = services.length;
+           console.log(&quot;Got&quot; +  service_count + &quot;services&quot;);
+
+           services.forEach(service =&gt; {
+             if(service.uuid == ACCELEROMETER_SERVICE)
+             {
+              has_accelerometer_service = true;
+             }
+             if(service.uuid == LED_SERVICE)
+             {
+              has_led_service = true;
+             }
+             if(service.uuid == DEVICE_INFORMATION_SERVICE)
+             {
+              has_device_information_service = true;
+             }
+             console.log(&apos;Getting Characteristics for servicer&apos; + service.uuid);
+             service.getCharacteristics()
+             .then(getCharacteristics =&gt;
+             {
+               console.log(&apos;&gt; Service:&apos; + service.uuid);
+               services_discovered++;
+               Characteristics_discovered = 0;
+               Characteristic_count = Characteristic.length;
+               Characteristics.forEach(characteristics =&gt;
+               {
+                characteristics_discovered++;
+                console.log(&apos;&gt;&gt; Characteristics:&apos; + characteristics.uuid);
+                if(characteristics.uuid == ACCELEROMETER_DATA)
+                {
+                 accelerometer_data = characteristics;
+                 has_accelerometer_data = true;
+                }
+                if(characteristics.uuid == LED_MATRIX_STATE)
+                {
+                 led_matrix_state = characteristics;
+                 has_led_matrix_state = true;
+                }
+                if(characteristics.uuid == MODEL_NUMBER_STRING)
+                {
+                 model_number_string= characteristics;
+                 has_model_number_string = true;
+                }
+                if(services_discovered == service_count&amp;&amp;characteristics_discovered == characteristic_count)
+                {
+                  console.log(&quot;FINISHED DISCOVERY&quot;);
+                  setDiscoveryStatus(true);
+                  //setDiscoveryStatus(true);
+                }
+               }
+               )
+             }
+             )
+           });
+         }
+         )
+     }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Status&lt;/h2&gt;  &lt;!--显示蓝牙状态--&gt;
+&lt;table border=&quot;1&quot;&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;b&gt;Connected&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;b&gt;Service Discovery Completed&lt;/b&gt;&lt;/td&gt;
+  &lt;/tr&gt;&lt;!--表格第一行--&gt;
+  &lt;tr&gt;
+    &lt;td id=&quot;Status_connected&quot;&gt; false &lt;/td&gt;
+    &lt;td id=&quot;Status_discovered&quot;&gt; false &lt;/td&gt;
+  &lt;/tr&gt;&lt;!--表格第二行--&gt;
+&lt;/table&gt;
+&lt;h2&gt;Device Discovery&lt;/h2&gt;&lt;!--扫描/发现蓝牙设备--&gt;
+
+&lt;button id=&quot;btn_scan&quot;  onclick=&quot;discoverDevices()&quot;&gt;Start scan&lt;/button&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/06/16/%E4%B8%80%E3%80%81%E7%A1%AE%E8%AE%A4%E6%9C%AC%E6%9C%BA%E4%B8%8A%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99/">一、确认本机上是否安装蓝牙</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
       <p><p>一、确认本机上是否安装蓝牙</p>
@@ -143,64 +696,11 @@
       <div class="post-button"><a class="btn" href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E5%AE%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/">我的第一张博文</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-03</span>
-      <p><p>语法注意点：</p>
-<ul>
-<li><p>代码区的的起始符```和上一行之间必须单独加一空行；</p>
-</li>
-<li><p>首行缩进：在段落开头加上 &amp; emsp; 注意&amp;和e之间没有空格。</p>
-</li>
-<li><p>分隔线：输入—后回车。</p>
-</li>
-<li><p>斜体：用在需要大段引用他人文字的部分 。 用两个“*”把相应的文字夹起来 </p>
-</li>
-<li><p>强调：一级强调是加粗（ 用两个“**”把内容夹起来 ），二级强调是引用（在内容前加上 &gt; ）</p>
-</li>
-<li><p>“#”，“&gt;”这两个符号，一定要在行首，不要空格，否则会引起识别的问题#</p>
-<p>###Node.js安装：一路next<br>#git安装：一路next</p>
-</li>
-</ul>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/04/03/hello-world/">Hello World</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-03</span>
-      <p><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a><br>#安装Node.js（一路next）</p>
-<p><img src="C:%5CUsers%5CASUS%5CDesktop%5C2(IB8EHS$D0TW722QFBXB%5BJ.png" alt=""></p>
-<p>#安装Git(一路next)</p>
-<p><img src="C:%5CUsers%5CASUS%5CDesktop%5C2(IB8EHS$D0TW722QFBXB%5BJ.png" alt=""></p>
-<p>安装Hexo</p>
-<p>1 npm install hexo-cli -g</p>
-<p><img src="C:%5CUsers%5CASUS%5CDesktop%5CWH%60O~%5D$@A%7DBR1DQTJD_%606.png" alt=""></p>
-<p>2 hexo -v</p>
-<p>md blog </p>
-<p>cd blog hexo init</p>
-<p>hexo s</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/hello-world/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
 
 
-
+<div id="pagination">
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"></a>
+</div>
 
 <footer>
   <div>
