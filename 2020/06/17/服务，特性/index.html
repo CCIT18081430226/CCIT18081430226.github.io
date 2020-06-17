@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>连接状态和断开连接 | Hexo</title>
+  <title>服务，特性 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="北音执念">
   <meta name="keywords" content="">
@@ -70,7 +70,7 @@
   <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
     <span>2020-06-17</span>
-    <h2>连接状态和断开连接</h2>
+    <h2>服务，特性</h2>
     
     </div>
 </div>
@@ -85,49 +85,108 @@
 <html> <!--用于定义文档的头部，描述了文档各种属性和信息-->
 
   <head>
-      <script>
-          function setConnectedStatus(status)  //在第三课基础上添加的函数，设置电脑蓝牙当前的连接状态
-        {
-            connected = status;
-            document.getElementById('status_connected').innerHTML = status;
-            if (status == true)
-            {
-                document.getElementById('btn_scan').innerHTML = "Disconnect";//连接完成之后就需要断开连接，disconnect断开连接
-            }
-            else
-            {
-                document.getElementById('btn_scan').innerHTML = "Discover Devices";
-            }
-        }
-          function discoverOrdisconnectDevices()//第四节课
+           <script>
+            var services_discovered = false;//5接课
+            //5接课
+     //presence of services and characteristics
+     var has_accelerometer_service = false;
+     var has_accelerometer_data = false;
+     var has_led_matrix_state = false;
+     var has_led_matrix_state = false;
+     var has_device_information_service = false;
+     var has_model_number_string = false;
+     //servicers UUIDs
+     ACCELEROMETER_SERVICE = 'e95d0753-251d-470a-a062-fa1922dfa9a8';
+     LED_SERVICE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     DEVICE_INFORMATION_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb';
+     //characteristics UUIDs
+     ACCELEROMETER_DATA = 'e95dca4b-251d-470a-a062-fa1922dfa9a8';
+     LED_MATRIX_STATE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     MODEL_NUMBER_STRING = '00002a24-0000-1000-8000-00805f9b34fb';
+     //cached characteristics
+     var led_matrix_state
+     var model_number_string;
+     var accelerometer_data;
+     //
+     var service_count;
+     var services_discovered;
+     var characteristic_count;
+     var characteristics_discovered;
+               function resetUI()//第四节课基础上添加函数
      {
-       console.log("discoverOrdisconnectDevices");
-       if(!connected)
-       {
-         discoverDevices();
-       }
-       else
-       {
-         selected_device.gatt.disconnect();//断开连接
-       }
+       setConnectedStatus(false);
+       setConnectedStatus(false);//第五节课基础上添加函数
      }
+               function discoverSvcsAndChars()//第五节课添加函数
+     {
+         console.log("discoverSvcsAndChars server= " + connected_server);
+         connected_server.getPrimaryServices()
+         .then(services =>
+         {
+           has_accelerometer_service = false;
+           has_led_service = false;
+           has_device_information_service = false;
 
-<pre><code>function onDisconnected()//4课
-{
-  console.log(&quot;onDisconnected&quot;);
-  resetUI();
+<pre><code>      services_discovered = 0;
+      service_count = services.length;
+      console.log(&quot;Got&quot; +  service_count + &quot;services&quot;);
+
+      services.forEach(service =&gt; {
+        if(service.uuid == ACCELEROMETER_SERVICE)
+        {
+         has_accelerometer_service = true;
+        }
+        if(service.uuid == LED_SERVICE)
+        {
+         has_led_service = true;
+        }
+        if(service.uuid == DEVICE_INFORMATION_SERVICE)
+        {
+         has_device_information_service = true;
+        }
+        console.log(&apos;Getting Characteristics for servicer&apos; + service.uuid);
+        service.getCharacteristics()
+        .then(getCharacteristics =&gt;
+        {
+          console.log(&apos;&gt; Service:&apos; + service.uuid);
+          services_discovered++;
+          Characteristics_discovered = 0;
+          Characteristic_count = Characteristic.length;
+          Characteristics.forEach(characteristics =&gt;
+          {
+           characteristics_discovered++;
+           console.log(&apos;&gt;&gt; Characteristics:&apos; + characteristics.uuid);
+           if(characteristics.uuid == ACCELEROMETER_DATA)
+           {
+            accelerometer_data = characteristics;
+            has_accelerometer_data = true;
+           }
+           if(characteristics.uuid == LED_MATRIX_STATE)
+           {
+            led_matrix_state = characteristics;
+            has_led_matrix_state = true;
+           }
+           if(characteristics.uuid == MODEL_NUMBER_STRING)
+           {
+            model_number_string= characteristics;
+            has_model_number_string = true;
+           }
+           if(services_discovered == service_count&amp;&amp;characteristics_discovered == characteristic_count)
+           {
+             console.log(&quot;FINISHED DISCOVERY&quot;);
+             setDiscoveryStatus(true);
+             //setDiscoveryStatus(true);
+           }
+          });
+
+        });
+
+      });
+    });
+
 }
-function setDiscoveryStatus(status)
-{
-  services_discovered = status;
-  document.getElementById(&apos;statu
- &lt;/script&gt;</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
+       &lt;/script&gt;</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
 
-
-
-
-
-<p>​            </p>
 
       </div>
     </div>
@@ -136,12 +195,12 @@ function setDiscoveryStatus(status)
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/">
+		<a class="copy" href="#">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>服务，特性</h3>
+						<h3>No newer post</h3>
 					</div>
 				</div>
 			</div>
@@ -149,12 +208,12 @@ function setDiscoveryStatus(status)
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/">
+		<a class="copy" href="/2020/06/17/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>第二课连接设备</h3>
+						<h3>连接状态和断开连接</h3>
 					</div>
 				</div>
 			</div>

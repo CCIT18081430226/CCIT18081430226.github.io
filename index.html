@@ -81,6 +81,121 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/">服务，特性</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
+      <p><!DOCTYPE html>
+
+<html> <!--用于定义文档的头部，描述了文档各种属性和信息-->
+
+  <head>
+           <script>
+            var services_discovered = false;//5接课
+            //5接课
+     //presence of services and characteristics
+     var has_accelerometer_service = false;
+     var has_accelerometer_data = false;
+     var has_led_matrix_state = false;
+     var has_led_matrix_state = false;
+     var has_device_information_service = false;
+     var has_model_number_string = false;
+     //servicers UUIDs
+     ACCELEROMETER_SERVICE = 'e95d0753-251d-470a-a062-fa1922dfa9a8';
+     LED_SERVICE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     DEVICE_INFORMATION_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb';
+     //characteristics UUIDs
+     ACCELEROMETER_DATA = 'e95dca4b-251d-470a-a062-fa1922dfa9a8';
+     LED_MATRIX_STATE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     MODEL_NUMBER_STRING = '00002a24-0000-1000-8000-00805f9b34fb';
+     //cached characteristics
+     var led_matrix_state
+     var model_number_string;
+     var accelerometer_data;
+     //
+     var service_count;
+     var services_discovered;
+     var characteristic_count;
+     var characteristics_discovered;
+               function resetUI()//第四节课基础上添加函数
+     {
+       setConnectedStatus(false);
+       setConnectedStatus(false);//第五节课基础上添加函数
+     }
+               function discoverSvcsAndChars()//第五节课添加函数
+     {
+         console.log("discoverSvcsAndChars server= " + connected_server);
+         connected_server.getPrimaryServices()
+         .then(services =>
+         {
+           has_accelerometer_service = false;
+           has_led_service = false;
+           has_device_information_service = false;
+
+<pre><code>      services_discovered = 0;
+      service_count = services.length;
+      console.log(&quot;Got&quot; +  service_count + &quot;services&quot;);
+
+      services.forEach(service =&gt; {
+        if(service.uuid == ACCELEROMETER_SERVICE)
+        {
+         has_accelerometer_service = true;
+        }
+        if(service.uuid == LED_SERVICE)
+        {
+         has_led_service = true;
+        }
+        if(service.uuid == DEVICE_INFORMATION_SERVICE)
+        {
+         has_device_information_service = true;
+        }
+        console.log(&apos;Getting Characteristics for servicer&apos; + service.uuid);
+        service.getCharacteristics()
+        .then(getCharacteristics =&gt;
+        {
+          console.log(&apos;&gt; Service:&apos; + service.uuid);
+          services_discovered++;
+          Characteristics_discovered = 0;
+          Characteristic_count = Characteristic.length;
+          Characteristics.forEach(characteristics =&gt;
+          {
+           characteristics_discovered++;
+           console.log(&apos;&gt;&gt; Characteristics:&apos; + characteristics.uuid);
+           if(characteristics.uuid == ACCELEROMETER_DATA)
+           {
+            accelerometer_data = characteristics;
+            has_accelerometer_data = true;
+           }
+           if(characteristics.uuid == LED_MATRIX_STATE)
+           {
+            led_matrix_state = characteristics;
+            has_led_matrix_state = true;
+           }
+           if(characteristics.uuid == MODEL_NUMBER_STRING)
+           {
+            model_number_string= characteristics;
+            has_model_number_string = true;
+           }
+           if(services_discovered == service_count&amp;&amp;characteristics_discovered == characteristic_count)
+           {
+             console.log(&quot;FINISHED DISCOVERY&quot;);
+             setDiscoveryStatus(true);
+             //setDiscoveryStatus(true);
+           }
+          });
+
+        });
+
+      });
+    });
+
+}
+       &lt;/script&gt;</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
+
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/06/17/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/">连接状态和断开连接</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
       <p><!DOCTYPE html>
@@ -800,14 +915,6 @@ function setDiscoveryStatus(status)
 <p>在chr ome浏览器的地址栏中输入chr ome://bluetooth-internals,进入Devices后选择Name为BBCmicro:bit [gitup]的一 -行。若板子上显示字符C,则表示电脑端和板子端正常运行。</p>
 </p>
       <div class="post-button"><a class="btn" href="/2020/06/16/%E4%B8%80%E3%80%81%E7%A1%AE%E8%AE%A4%E6%9C%AC%E6%9C%BA%E4%B8%8A%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/04/03/%E5%AE%89%E8%A3%85hexo/">安装hexo</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-03</span>
-      <p></p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/%E5%AE%89%E8%A3%85hexo/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
