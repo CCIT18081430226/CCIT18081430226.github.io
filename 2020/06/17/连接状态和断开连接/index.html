@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>Archives | Hexo</title>
+  <title>连接状态和断开连接 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="北音执念">
   <meta name="keywords" content="">
@@ -60,44 +60,108 @@
   
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-<meta name="generator" content="Hexo 4.2.0"></head>
+</head>
 <body>
+<div class="single">
 
 <div id="page">
-
-<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/cover.jpeg)">
+<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/post_cover.jpeg)" data-stellar-background-ratio="0.5">
   <div class="overlay">
-  <div class="featured">
+  <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
-    <span>北音执念</span>
-    <h1>Hexo</h1>
-    <span>——记录生活</span>
+    <span>2020-06-17</span>
+    <h2>连接状态和断开连接</h2>
     
-  </div>
-  </div>
+    </div>
+</div>
 </div>
 
 <div id="lx-main-content">
   <div class="lx-post">
-  <h2 class="pagehead">Archives</h2>
-    <div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-04-03</span>
-    <h2 class="title"><a href="/2020/04/03/%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87-1/">第一张博文</a></h2>
-    <p></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-04-03</span>
-    <h2 class="title"><a href="/2020/04/03/%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/">第一张博文</a></h2>
-    <p></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-04-03</span>
-    <h2 class="title"><a href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E5%AE%A2/">我的第一张博客</a></h2>
-    <p></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-04-03</span>
-    <h2 class="title"><a href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/">我的第一张博文</a></h2>
-    <p></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-04-03</span>
-    <h2 class="title"><a href="/2020/04/03/hello-world/">Hello World</a></h2>
-    <p></p></div></div>
-<div id="pagination">
-  <a class="extend prev" rel="prev" href="/archives/2020/"></a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span>
+    <div class="lx-entry padding">
+      <div>
+        <!DOCTYPE html>
+
+<html> <!--用于定义文档的头部，描述了文档各种属性和信息-->
+
+  <head>
+      <script>
+          function setConnectedStatus(status)  //在第三课基础上添加的函数，设置电脑蓝牙当前的连接状态
+        {
+            connected = status;
+            document.getElementById('status_connected').innerHTML = status;
+            if (status == true)
+            {
+                document.getElementById('btn_scan').innerHTML = "Disconnect";//连接完成之后就需要断开连接，disconnect断开连接
+            }
+            else
+            {
+                document.getElementById('btn_scan').innerHTML = "Discover Devices";
+            }
+        }
+          function discoverOrdisconnectDevices()//第四节课
+     {
+       console.log("discoverOrdisconnectDevices");
+       if(!connected)
+       {
+         discoverDevices();
+       }
+       else
+       {
+         selected_device.gatt.disconnect();//断开连接
+       }
+     }
+
+<pre><code>function onDisconnected()//4课
+{
+  console.log(&quot;onDisconnected&quot;);
+  resetUI();
+}
+function setDiscoveryStatus(status)
+{
+  services_discovered = status;
+  document.getElementById(&apos;statu
+ &lt;/script&gt;</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+
+
+<p>​            </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>第二课连接设备</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
 </div>
 
 <footer>
@@ -106,8 +170,6 @@
   </div>
 </footer>
 
-  </div>
-</div>
 </div>
 
 <button class="hamburger hamburger--arrow-r" type="button">
