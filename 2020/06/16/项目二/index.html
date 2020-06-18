@@ -221,85 +221,69 @@
        {
           document.getElementById(&apos;btn_scan&apos;).innerHTML=&quot;Discover Devices&quot;;
        }
-     }
+     }</code></pre><p>​<br>         function setDiscoveryStatus(status)<br>         {<br>           services_discovered = status;<br>           document.getElementById(‘status.discovered’).innerHTML = status;<br>         }</p>
+<pre><code>function onDisconnected()//4课
+    {
+      console.log(&quot;onDisconnected&quot;);
+      resetUI();
+    }
 
-
-     function setDiscoveryStatus(status)
-     {
-       services_discovered = status;
-       document.getElementById(&apos;status.discovered&apos;).innerHTML = status;
-     }
-
- function onDisconnected()//4课
-     {
-       console.log(&quot;onDisconnected&quot;);
-       resetUI();
-     }
-
-     function discoverDevices()
-     {  
-        console.log(&quot;discoverDevices&quot;);//&lt;!--console，log控制台打印输出--&gt;
-        var options = {acceptAllDevices:true}
-        navigator.bluetooth.requestDevice(options)
-        .then(device =&gt; {
-            console.log(&apos;&gt; Name:&apos; + device.name);
-            console.log(&apos;&gt; Id:&apos; + device.id);  
-            console.log(&apos;&gt; Connected:&apos; + device.gatt.connected);
-            selected_device=device;
-            console.log(selected_device);
-            connect();
-         })
-        .catch(error =&gt; {
-            alert(&apos;ERROR &apos; + error);
-            console.log(&apos;ERROR:&apos; + error);
-             });
-     }
-     function connect()///第二节课添加函数
-     { 
-       console.log(&quot;connecting&quot;);
-       selected_device.gatt.connect()
-       .then(
-                function(server) //表示连接成功
-                {
-                  console.log(&quot;Connected to&quot; + server.device.id);
-                  console.log(&quot;Connected=&quot; + server.connected);
-                  selected_device.addEventListener(&apos;gattserverdisconnected&apos;,onDisconnected);
-
-                  connected_server=server;
-                  discoverSvcsAndChars();//第5节课添加函数
-                  setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
-                },
-               function(error)//表示连接失败
+    function discoverDevices()
+    {  
+       console.log(&quot;discoverDevices&quot;);//&lt;!--console，log控制台打印输出--&gt;
+       var options = {acceptAllDevices:true}
+       navigator.bluetooth.requestDevice(options)
+       .then(device =&gt; {
+           console.log(&apos;&gt; Name:&apos; + device.name);
+           console.log(&apos;&gt; Id:&apos; + device.id);  
+           console.log(&apos;&gt; Connected:&apos; + device.gatt.connected);
+           selected_device=device;
+           console.log(selected_device);
+           connect();
+        })
+       .catch(error =&gt; {
+           alert(&apos;ERROR &apos; + error);
+           console.log(&apos;ERROR:&apos; + error);
+            });
+    }
+    function connect()///第二节课添加函数
+    { 
+      console.log(&quot;connecting&quot;);
+      selected_device.gatt.connect()
+      .then(
+               function(server) //表示连接成功
                {
-                 console.log(&quot;ERROR:could not connct-&quot; + error);
-                 alert(&quot;ERROR:could not connct-&quot; + error);
-                 setConnectedStatus(false);
-               }
-              );
-     }
+                 console.log(&quot;Connected to&quot; + server.device.id);
+                 console.log(&quot;Connected=&quot; + server.connected);
+                 selected_device.addEventListener(&apos;gattserverdisconnected&apos;,onDisconnected);
 
-     function setConnectedStatus(Status)  //第三节课添加函数，设置电脑蓝牙当前连接状态
-     {
-       connect = status;
-       document.getElementById(&apos;status_connected&apos;).innerHTML = status;
-       if(status==true)
-       {
-          document.getElementById(&apos;btn_scan&apos;).innerHTML = &quot;Disconnect&quot;;
-       }
-       else
-       {
-          document.getElementById(&apos;btn_scan&apos;).innerHTML=&quot;Discover Devices&quot;;
-       }
-     }
+                 connected_server=server;
+                 discoverSvcsAndChars();//第5节课添加函数
+                 setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
+               },
+              function(error)//表示连接失败
+              {
+                console.log(&quot;ERROR:could not connct-&quot; + error);
+                alert(&quot;ERROR:could not connct-&quot; + error);
+                setConnectedStatus(false);
+              }
+             );
+    }
 
-
-     function setDiscoveryStatus(status)
-     {
-       services_discovered = status;
-       document.getElementById(&apos;status.discovered&apos;).innerHTML = status;
-     }
-
-     function resetUI()//第四节课基础上添加函数
+    function setConnectedStatus(Status)  //第三节课添加函数，设置电脑蓝牙当前连接状态
+    {
+      connect = status;
+      document.getElementById(&apos;status_connected&apos;).innerHTML = status;
+      if(status==true)
+      {
+         document.getElementById(&apos;btn_scan&apos;).innerHTML = &quot;Disconnect&quot;;
+      }
+      else
+      {
+         document.getElementById(&apos;btn_scan&apos;).innerHTML=&quot;Discover Devices&quot;;
+      }
+    }</code></pre><p>​<br>         function setDiscoveryStatus(status)<br>         {<br>           services_discovered = status;<br>           document.getElementById(‘status.discovered’).innerHTML = status;<br>         }</p>
+<pre><code>     function resetUI()//第四节课基础上添加函数
      {
        setConnectedStatus(false);
        setConnectedStatus(false);//第五节课基础上添加函数
