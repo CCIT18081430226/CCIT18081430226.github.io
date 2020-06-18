@@ -81,6 +81,310 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/">项目二</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><!DOCTYPE html>
+<html>
+<head><!--用于定义文档的头部，描述了文档各种属性和信息-->
+  <script>
+     var   selected_device ;   //<!--保存用户选择的蓝牙设备-->
+     var   connected_server;   //在第二节课基础上添加的变量，保存电脑当前蓝牙连接状态
+     var   connected = false;
+     var services_discovered = false;//5接课
+     //5接课
+     //presence of services and characteristics
+     var has_accelerometer_service = false;
+     var has_accelerometer_data = false;
+     var has_led_matrix_state = false;
+     var has_led_matrix_state = false;
+     var has_device_information_service = false;
+     var has_model_number_string = false;
+     //servicers UUIDs
+     ACCELEROMETER_SERVICE = 'e95d0753-251d-470a-a062-fa1922dfa9a8';
+     LED_SERVICE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     DEVICE_INFORMATION_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb';
+     //characteristics UUIDs
+     ACCELEROMETER_DATA = 'e95dca4b-251d-470a-a062-fa1922dfa9a8';
+     LED_MATRIX_STATE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';
+     MODEL_NUMBER_STRING = '00002a24-0000-1000-8000-00805f9b34fb';
+     //cached characteristics
+     var led_matrix_state
+     var model_number_string;
+     var accelerometer_data;
+     //
+     var service_count;
+     var services_discovered;
+     var characteristic_count;
+     var characteristics_discovered;
+
+<pre><code> &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;!--用于定义文档的头部，描述了文档各种属性和信息--&gt;
+  &lt;script&gt;
+     var   selected_device ;   //&lt;!--保存用户选择的蓝牙设备--&gt;
+     var   connected_server;   //在第二节课基础上添加的变量，保存电脑当前蓝牙连接状态
+     var   connected = false;
+     var services_discovered = false;//5接课
+     //5接课
+     //presence of services and characteristics
+     var has_accelerometer_service = false;
+     var has_accelerometer_data = false;
+     var has_led_matrix_state = false;
+     var has_led_matrix_state = false;
+     var has_device_information_service = false;
+     var has_model_number_string = false;
+     //servicers UUIDs
+     ACCELEROMETER_SERVICE = &apos;e95d0753-251d-470a-a062-fa1922dfa9a8&apos;;
+     LED_SERVICE = &apos;e95dd91d-251d-470a-a062-fa1922dfa9a8&apos;;
+     DEVICE_INFORMATION_SERVICE = &apos;0000180a-0000-1000-8000-00805f9b34fb&apos;;
+     //characteristics UUIDs
+     ACCELEROMETER_DATA = &apos;e95dca4b-251d-470a-a062-fa1922dfa9a8&apos;;
+     LED_MATRIX_STATE = &apos;e95dd91d-251d-470a-a062-fa1922dfa9a8&apos;;
+     MODEL_NUMBER_STRING = &apos;00002a24-0000-1000-8000-00805f9b34fb&apos;;
+     //cached characteristics
+     var led_matrix_state
+     var model_number_string;
+     var accelerometer_data;
+     //
+     var service_count;
+     var services_discovered;
+     var characteristic_count;
+     var characteristics_discovered;
+
+     function discoverOrdisconnectDevices()//第四节课
+     {
+       console.log(&quot;discoverOrdisconnectDevices&quot;);
+       if(!connected)
+       {
+         discoverDevices();
+       }
+       else
+       {
+         selected_device.gatt.disconnect();//断开连接
+       }
+     }
+
+     function onDisconnected()//4课
+     {
+       console.log(&quot;onDisconnected&quot;);
+       resetUI();
+     }
+
+     function discoverDevices()
+     {  
+        console.log(&quot;discoverDevices&quot;);//&lt;!--console，log控制台打印输出--&gt;
+        var options = {acceptAllDevices:true}
+        navigator.bluetooth.requestDevice(options)
+        .then(device =&gt; {
+            console.log(&apos;&gt; Name:&apos; + device.name);
+            console.log(&apos;&gt; Id:&apos; + device.id);  
+            console.log(&apos;&gt; Connected:&apos; + device.gatt.connected);
+            selected_device=device;
+            console.log(selected_device);
+            connect();
+         })
+        .catch(error =&gt; {
+            alert(&apos;ERROR &apos; + error);
+            console.log(&apos;ERROR:&apos; + error);
+             });
+     }
+     function connect()///第二节课添加函数
+     { 
+       console.log(&quot;connecting&quot;);
+       selected_device.gatt.connect()
+       .then(
+                function(server) //表示连接成功
+                {
+                  console.log(&quot;Connected to&quot; + server.device.id);
+                  console.log(&quot;Connected=&quot; + server.connected);
+                  selected_device.addEventListener(&apos;gattserverdisconnected&apos;,onDisconnected);
+
+                  connected_server=server;
+                  discoverSvcsAndChars();//第5节课添加函数
+                  setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
+                },
+               function(error)//表示连接失败
+               {
+                 console.log(&quot;ERROR:could not connct-&quot; + error);
+                 alert(&quot;ERROR:could not connct-&quot; + error);
+                 setConnectedStatus(false);
+               }
+              );
+     }
+
+     function setConnectedStatus(Status)  //第三节课添加函数，设置电脑蓝牙当前连接状态
+     {
+       connect = status;
+       document.getElementById(&apos;status_connected&apos;).innerHTML = status;
+       if(status==true)
+       {
+          document.getElementById(&apos;btn_scan&apos;).innerHTML = &quot;Disconnect&quot;;
+       }
+       else
+       {
+          document.getElementById(&apos;btn_scan&apos;).innerHTML=&quot;Discover Devices&quot;;
+       }
+     }</code></pre><p>​<br>         function setDiscoveryStatus(status)<br>         {<br>           services_discovered = status;<br>           document.getElementById(‘status.discovered’).innerHTML = status;<br>         }</p>
+<pre><code>function onDisconnected()//4课
+    {
+      console.log(&quot;onDisconnected&quot;);
+      resetUI();
+    }
+
+    function discoverDevices()
+    {  
+       console.log(&quot;discoverDevices&quot;);//&lt;!--console，log控制台打印输出--&gt;
+       var options = {acceptAllDevices:true}
+       navigator.bluetooth.requestDevice(options)
+       .then(device =&gt; {
+           console.log(&apos;&gt; Name:&apos; + device.name);
+           console.log(&apos;&gt; Id:&apos; + device.id);  
+           console.log(&apos;&gt; Connected:&apos; + device.gatt.connected);
+           selected_device=device;
+           console.log(selected_device);
+           connect();
+        })
+       .catch(error =&gt; {
+           alert(&apos;ERROR &apos; + error);
+           console.log(&apos;ERROR:&apos; + error);
+            });
+    }
+    function connect()///第二节课添加函数
+    { 
+      console.log(&quot;connecting&quot;);
+      selected_device.gatt.connect()
+      .then(
+               function(server) //表示连接成功
+               {
+                 console.log(&quot;Connected to&quot; + server.device.id);
+                 console.log(&quot;Connected=&quot; + server.connected);
+                 selected_device.addEventListener(&apos;gattserverdisconnected&apos;,onDisconnected);
+
+                 connected_server=server;
+                 discoverSvcsAndChars();//第5节课添加函数
+                 setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
+               },
+              function(error)//表示连接失败
+              {
+                console.log(&quot;ERROR:could not connct-&quot; + error);
+                alert(&quot;ERROR:could not connct-&quot; + error);
+                setConnectedStatus(false);
+              }
+             );
+    }
+
+    function setConnectedStatus(Status)  //第三节课添加函数，设置电脑蓝牙当前连接状态
+    {
+      connect = status;
+      document.getElementById(&apos;status_connected&apos;).innerHTML = status;
+      if(status==true)
+      {
+         document.getElementById(&apos;btn_scan&apos;).innerHTML = &quot;Disconnect&quot;;
+      }
+      else
+      {
+         document.getElementById(&apos;btn_scan&apos;).innerHTML=&quot;Discover Devices&quot;;
+      }
+    }</code></pre><p>​<br>         function setDiscoveryStatus(status)<br>         {<br>           services_discovered = status;<br>           document.getElementById(‘status.discovered’).innerHTML = status;<br>         }</p>
+<pre><code>     function resetUI()//第四节课基础上添加函数
+     {
+       setConnectedStatus(false);
+       setConnectedStatus(false);//第五节课基础上添加函数
+     }
+
+     function discoverSvcsAndChars()//第五节课添加函数
+     {
+         console.log(&quot;discoverSvcsAndChars server= &quot; + connected_server);
+         connected_server.getPrimaryServices()
+         .then(services =&gt;
+         {
+           has_accelerometer_service = false;
+           has_led_service = false;
+           has_device_information_service = false;
+
+           services_discovered = 0;
+           service_count = services.length;
+           console.log(&quot;Got&quot; +  service_count + &quot;services&quot;);
+
+           services.forEach(service =&gt; {
+             if(service.uuid == ACCELEROMETER_SERVICE)
+             {
+              has_accelerometer_service = true;
+             }
+             if(service.uuid == LED_SERVICE)
+             {
+              has_led_service = true;
+             }
+             if(service.uuid == DEVICE_INFORMATION_SERVICE)
+             {
+              has_device_information_service = true;
+             }
+             console.log(&apos;Getting Characteristics for servicer&apos; + service.uuid);
+             service.getCharacteristics()
+             .then(getCharacteristics =&gt;
+             {
+               console.log(&apos;&gt; Service:&apos; + service.uuid);
+               services_discovered++;
+               Characteristics_discovered = 0;
+               Characteristic_count = Characteristic.length;
+               Characteristics.forEach(characteristics =&gt;
+               {
+                characteristics_discovered++;
+                console.log(&apos;&gt;&gt; Characteristics:&apos; + characteristics.uuid);
+                if(characteristics.uuid == ACCELEROMETER_DATA)
+                {
+                 accelerometer_data = characteristics;
+                 has_accelerometer_data = true;
+                }
+                if(characteristics.uuid == LED_MATRIX_STATE)
+                {
+                 led_matrix_state = characteristics;
+                 has_led_matrix_state = true;
+                }
+                if(characteristics.uuid == MODEL_NUMBER_STRING)
+                {
+                 model_number_string= characteristics;
+                 has_model_number_string = true;
+                }
+                if(services_discovered == service_count&amp;&amp;characteristics_discovered == characteristic_count)
+                {
+                  console.log(&quot;FINISHED DISCOVERY&quot;);
+                  setDiscoveryStatus(true);
+                  //setDiscoveryStatus(true);
+                }
+               }
+               )
+             }
+             )
+           });
+         }
+         )
+     }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Status&lt;/h2&gt;  &lt;!--显示蓝牙状态--&gt;
+&lt;table border=&quot;1&quot;&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;b&gt;Connected&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;b&gt;Service Discovery Completed&lt;/b&gt;&lt;/td&gt;
+  &lt;/tr&gt;&lt;!--表格第一行--&gt;
+  &lt;tr&gt;
+    &lt;td id=&quot;Status_connected&quot;&gt; false &lt;/td&gt;
+    &lt;td id=&quot;Status_discovered&quot;&gt; false &lt;/td&gt;
+  &lt;/tr&gt;&lt;!--表格第二行--&gt;
+&lt;/table&gt;
+&lt;h2&gt;Device Discovery&lt;/h2&gt;&lt;!--扫描/发现蓝牙设备--&gt;
+
+&lt;button id=&quot;btn_scan&quot;  onclick=&quot;discoverDevices()&quot;&gt;Start scan&lt;/button&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/06/16/%E4%B8%80%E3%80%81%E7%A1%AE%E8%AE%A4%E6%9C%AC%E6%9C%BA%E4%B8%8A%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99/">一、确认本机上是否安装蓝牙</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
       <p><p>一、确认本机上是否安装蓝牙</p>
