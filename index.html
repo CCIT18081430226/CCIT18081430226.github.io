@@ -81,6 +81,73 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/06/21/%E7%89%B9%E6%80%A7%E5%86%99/">特性写</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
+      <p><!DOCTYPE html>
+
+<html>
+
+  <head>
+       <h2>Reading and Writing</h2>
+        <h3>Write Charateristic - Randomise Lights</h3>
+        <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button>
+        <hr>
+  <meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+<pre><code>&lt;script&gt;
+    function randomLEDs()
+{
+    console.log(&quot;randomLEDs&quot;);
+
+    if (!connected)
+    {
+        alert(&quot;Error: Discover and connect to a device before using this function&quot;);
+        return
+    }
+    if (!services_discovered)
+    {
+           alert(&quot;Error: Service discovery has not yet completed&quot;);
+           return
+    }
+   if (!has_led_service)
+    {
+           alert(&quot;Error: The connected device does not contain the LED service&quot;);
+           return
+    }
+   if (!has_led_matrix_state)
+    {
+           alert(&quot;Error: The connected device does not contain the LED matrix state characteristic&quot;);
+           return;
+    }
+    var led_array = [0, 0, 0, 0, 0];
+
+
+    led_array[0] = Math.floor(Math.random() * 32);
+    led_array[1] = 1;
+    led_array[2] = 2;
+    led_array[3] = 3;
+    led_array[4] = 4;
+
+    var led_matrix_data = new Uint8Array(led_array);
+
+    led_matrix_state.writeValue(led_matrix_data.buffer)
+    .then(_ =&gt; {
+       console.log(&apos;LED matrix state changed&apos;);
+    })
+    .catch(error =&gt;{
+        console.log(&apos;Error &apos;+ error);
+        alert(&apos;Error: &apos; + error); return;
+     });
+}
+&lt;/script&gt;</code></pre><p>​            </p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/21/%E7%89%B9%E6%80%A7%E5%86%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A71/">写特性1</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
       <p><h2>Reading and Writing</h2>
@@ -89,7 +156,7 @@
 <p>​    <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button></p>
 <p>​    <hr></p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A71/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A71/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -138,7 +205,7 @@
 <p>​       });</p>
 <p>​    }</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -224,7 +291,7 @@
 
 <p>​            </p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/18/%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%8E%B7%E5%8F%96/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/18/%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%8E%B7%E5%8F%96/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -269,7 +336,7 @@
 <hr>-->
 
   </body></p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%89%AB%E6%8F%8F/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%89%AB%E6%8F%8F/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -320,7 +387,7 @@
 
 
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -376,7 +443,7 @@ function setDiscoveryStatus(status)
 
 <p>​            </p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/17/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -436,7 +503,7 @@ function setDiscoveryStatus(status)
 
 <p>&lt;/ html&gt;</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -469,7 +536,7 @@ function setDiscoveryStatus(status)
 <p>四、测试</p>
 <p>在chr ome浏览器的地址栏中输入chr ome://bluetooth-internals,进入Devices后选择Name为BBCmicro:bit [gitup]的一 -行。若板子上显示字符C,则表示电脑端和板子端正常运行</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E5%87%86%E5%A4%87%E5%89%8D%E7%9A%84/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/17/%E5%87%86%E5%A4%87%E5%89%8D%E7%9A%84/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -503,110 +570,13 @@ function setDiscoveryStatus(status)
 
 <p><button id="btn_scan" onclick="discoverDevices()">Start scan</button></p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/16/h2Statush2%20!--%E6%98%BE%E7%A4%BA%E8%93%9D%E7%89%99%E7%8A%B6%E6%80%81--/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/16/function%20setConnectedStatus(Status)%20%E7%AC%AC%E4%B8%89%E8%8A%82%E8%AF%BE%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AE%BE%E7%BD%AE%E7%94%B5%E8%84%91%E8%93%9D%E7%89%99%E5%BD%93%E5%89%8D%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81/">function setConnectedStatus(Status) 第三节课添加函数，设置电脑蓝牙当前连接状态</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
-      <p><p>function setConnectedStatus(Status) //第三节课添加函数，设置电脑蓝牙当前连接状态</p>
-<p>   {</p>
-<p>​    connect = status;</p>
-<p>​    document.getElementById(‘status_connected’).innerHTML = status;</p>
-<p>​    if(status==true)</p>
-<p>​    {</p>
-<p>​     document.getElementById(‘btn_scan’).innerHTML = “Disconnect”;</p>
-<p>​    }</p>
-<p>​    else</p>
-<p>​    {</p>
-<p>​     document.getElementById(‘btn_scan’).innerHTML=”Discover Devices”;</p>
-<p>​    }</p>
-<p>   }</p>
-<p>   function setDiscoveryStatus(status)</p>
-<p>   {</p>
-<p>​    services_discovered = status;</p>
-<p>​    document.getElementById(‘status.discovered’).innerHTML = status;</p>
-<p>   }</p>
-<p>   function resetUI()//第四节课基础上添加函数</p>
-<p>   {</p>
-<p>​    setConnectedStatus(false);</p>
-<p>​    setConnectedStatus(false);//第五节课基础上添加函数</p>
-<p>   }</p>
-<p>   function discoverSvcsAndChars()//第五节课添加函数</p>
-<p>   {</p>
-<p>​     console.log(“discoverSvcsAndChars server= “ + connected_server);</p>
-<p>​     connected_server.getPrimaryServices()</p>
-<p>​     .then(services =&gt;</p>
-<p>​     {</p>
-<p>​      has_accelerometer_service = false;</p>
-<p>​      has_led_service = false;</p>
-<p>​      has_device_information_service = false;</p>
-<p>​      services_discovered = 0;</p>
-<p>​      service_count = services.length;</p>
-<p>​      console.log(“Got” + service_count + “services”);</p>
-<p>​      services.forEach(service =&gt; {</p>
-<p>​       if(service.uuid == ACCELEROMETER_SERVICE)</p>
-<p>​       {</p>
-<p>​       has_accelerometer_service = true;</p>
-<p>​       }</p>
-<p>​       if(service.uuid == LED_SERVICE)</p>
-<p>​       {</p>
-<p>​       has_led_service = true;</p>
-<p>​       }</p>
-<p>​       if(service.uuid == DEVICE_INFORMATION_SERVICE)</p>
-<p>​       {</p>
-<p>​       has_device_information_service = true;</p>
-<p>​       }</p>
-<p>​       console.log(‘Getting Characteristics for servicer’ + service.uuid);</p>
-<p>​       service.getCharacteristics()</p>
-<p>​       .then(getCharacteristics =&gt;</p>
-<p>​       {</p>
-<p>​        console.log(‘&gt; Service:’ + service.uuid);</p>
-<p>​        services_discovered++;</p>
-<p>​        Characteristics_discovered = 0;</p>
-<p>​        Characteristic_count = Characteristic.length;</p>
-<p>​        Characteristics.forEach(characteristics =&gt;</p>
-<p>​        {</p>
-<p>​        characteristics_discovered++;</p>
-<p>​        console.log(‘&gt;&gt; Characteristics:’ + characteristics.uuid);</p>
-<p>​        if(characteristics.uuid == ACCELEROMETER_DATA)</p>
-<p>​        {</p>
-<p>​         accelerometer_data = characteristics;</p>
-<p>​         has_accelerometer_data = true;</p>
-<p>​        }</p>
-<p>​        if(characteristics.uuid == LED_MATRIX_STATE)</p>
-<p>​        {</p>
-<p>​         led_matrix_state = characteristics;</p>
-<p>​         has_led_matrix_state = true;</p>
-<p>​        }</p>
-<p>​        if(characteristics.uuid == MODEL_NUMBER_STRING)</p>
-<p>​        {</p>
-<p>​         model_number_string= characteristics;</p>
-<p>​         has_model_number_string = true;</p>
-<p>​        }</p>
-<p>​        if(services_discovered == service_count&amp;&amp;characteristics_discovered == characteristic_count)</p>
-<p>​        {</p>
-<p>​         console.log(“FINISHED DISCOVERY”);</p>
-<p>​         setDiscoveryStatus(true);</p>
-<p>​         //setDiscoveryStatus(true);</p>
-<p>​        }</p>
-<p>​        }</p>
-<p>​        )</p>
-<p>​       }</p>
-<p>​       )</p>
-<p>​      });</p>
-<p>​     }</p>
-<p>​     )</p>
-<p>   }</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/16/function%20setConnectedStatus(Status)%20%E7%AC%AC%E4%B8%89%E8%8A%82%E8%AF%BE%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%EF%BC%8C%E8%AE%BE%E7%BD%AE%E7%94%B5%E8%84%91%E8%93%9D%E7%89%99%E5%BD%93%E5%89%8D%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/16/h2Statush2%20!--%E6%98%BE%E7%A4%BA%E8%93%9D%E7%89%99%E7%8A%B6%E6%80%81--/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
 
 <div id="pagination">
-  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"></a>
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"></a>
 </div>
 
 <footer>
@@ -642,18 +612,18 @@ function setDiscoveryStatus(status)
   </div>
   <nav class="menu-container">
   <ul class="menu-items">
-    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
-    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
     
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
         <ul>
           <li><a href="/guestbook/">Guestbook</a></li>
         <li><a href="/about/">About</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-link fa-fw"></i>友链</span>
+      <i class="fa fa-link fa-fw"></i>Friends</span>
         <ul>
           <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
         </ul>
