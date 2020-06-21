@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>Hexo</title>
+  <title>读写 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="北音执念">
   <meta name="keywords" content="">
@@ -60,30 +60,27 @@
   
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
-<div id="page">
+<div class="single">
 
-<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/cover.jpeg)">
+<div id="page">
+<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/post_cover.jpeg)" data-stellar-background-ratio="0.5">
   <div class="overlay">
-  <div class="featured">
+  <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
-    <span>北音执念</span>
-    <h1>Hexo</h1>
-    <span>——记录生活</span>
+    <span>2020-06-21</span>
+    <h2>读写</h2>
     
-  </div>
-  </div>
+    </div>
+</div>
 </div>
 
 <div id="lx-main-content">
-  <div class="lx-post"> 
-
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E8%AF%BB%E5%86%99/">读写</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><!DOCTYPE html>
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <!DOCTYPE html>
 <html>
     <head>
         <script>
@@ -108,474 +105,40 @@
 <img src="C:\Users\ASUS\blog\source\_posts\读写.png" style="zoom:67%;" />
 
 <p><img src="C:%5CUsers%5CASUS%5Cblog%5Csource_posts%5CIMG20200621145319.jpg" alt=""></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E8%AF%BB%E5%86%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+
+      </div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E7%89%B9%E6%80%A7%E5%86%99/">特性写</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><!DOCTYPE html>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/06/21/%E7%89%B9%E6%80%A7%E5%86%99/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>特性写</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
 
-<html>
-
-  <head>
-       <h2>Reading and Writing</h2>
-        <h3>Write Charateristic - Randomise Lights</h3>
-        <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button>
-        <hr>
-  <meta name="generator" content="Hexo 4.2.0"></head>
-
-
-
-<pre><code>&lt;script&gt;
-    function randomLEDs()
-{
-    console.log(&quot;randomLEDs&quot;);
-
-    if (!connected)
-    {
-        alert(&quot;Error: Discover and connect to a device before using this function&quot;);
-        return
-    }
-    if (!services_discovered)
-    {
-           alert(&quot;Error: Service discovery has not yet completed&quot;);
-           return
-    }
-   if (!has_led_service)
-    {
-           alert(&quot;Error: The connected device does not contain the LED service&quot;);
-           return
-    }
-   if (!has_led_matrix_state)
-    {
-           alert(&quot;Error: The connected device does not contain the LED matrix state characteristic&quot;);
-           return;
-    }
-    var led_array = [0, 0, 0, 0, 0];
-
-
-    led_array[0] = Math.floor(Math.random() * 32);
-    led_array[1] = 1;
-    led_array[2] = 2;
-    led_array[3] = 3;
-    led_array[4] = 4;
-
-    var led_matrix_data = new Uint8Array(led_array);
-
-    led_matrix_state.writeValue(led_matrix_data.buffer)
-    .then(_ =&gt; {
-       console.log(&apos;LED matrix state changed&apos;);
-    })
-    .catch(error =&gt;{
-        console.log(&apos;Error &apos;+ error);
-        alert(&apos;Error: &apos; + error); return;
-     });
-}
-&lt;/script&gt;</code></pre><p>​            </p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E7%89%B9%E6%80%A7%E5%86%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A71/">写特性1</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><h2>Reading and Writing</h2>
-
-<p>​    <h3>Write Charateristic - Randomise Lights</h3></p>
-<p>​    <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button></p>
-<p>​    <hr></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A71/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A7/">写特性</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><p>function randomLEDs()</p>
-<p>​    {</p>
-<p>​      console.log(“randomLEDs”);</p>
-<p>​      if (!connected)</p>
-<p>​      {</p>
-<p>​        alert(“Error: Discover and connect to a device before using this function”);</p>
-<p>​        return</p>
-<p>​      }</p>
-<p>​      if (!services_discovered)</p>
-<p>​      {</p>
-<p>​          alert(“Error: Service discovery has not yet completed”);</p>
-<p>​          return</p>
-<p>​      }</p>
-<p>​      if (!has_led_service)</p>
-<p>​      {</p>
-<p>​          alert(“Error: The connected device does not contain the LED service”);</p>
-<p>​          return</p>
-<p>​      }</p>
-<p>​      if (!has_led_matrix_state)</p>
-<p>​      {</p>
-<p>​          alert(“Error: The connected device does not contain the LED matrix state characteristic”);</p>
-<p>​          return;</p>
-<p>​      }</p>
-<p>​      var led_array = [0, 0, 0, 0, 0];</p>
-<p>​      </p>
-<p>​      </p>
-<p>​      led_array[0] = Math.floor(Math.random() * 32);</p>
-<p>​      led_array[1] = 1;</p>
-<p>​      led_array[2] = 2;</p>
-<p>​      led_array[3] = 3;</p>
-<p>​      led_array[4] = 4;</p>
-<p>​      var led_matrix_data = new Uint8Array(led_array);</p>
-<p>​      led_matrix_state.writeValue(led_matrix_data.buffer)</p>
-<p>​      .then(_ =&gt; {</p>
-<p>​        console.log(‘LED matrix state changed’);</p>
-<p>​      })</p>
-<p>​      .catch(error =&gt;{</p>
-<p>​        console.log(‘Error ‘+ error);</p>
-<p>​        alert(‘Error: ‘ + error); return;</p>
-<p>​       });</p>
-<p>​    }</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/18/%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%8E%B7%E5%8F%96/">服务的获取</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-18</span>
-      <p><p>在遇到服务特性之前一路顺风，在遇到之后一路坎坷。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><!DOCTYPE html>
-
-<html>
-
-  <head>
-
-<pre><code> &lt;script&gt;
-     function discoverSvcsAndChars()
- {
-     console.log(&quot;discoverSvcsAndChars server=&quot; + connected_server);
-     connected_server.getPrimaryServices()
-     .then(services =&gt;
-     {
-         has_accelerometer_service = false;
-         has_led_service = false;
-         has_device_information_service = false;
-
-         services_discovered = 0;
-         service_count = services.length;
-         console.log(&quot;Got &quot; + service_count + &quot; services&quot;);
-
-         services.forEach(service =&gt;
-         {
-             if (service.uuid == ACCELEROMETER_SERVICE)
-             {
-                 has_accelerometer_service = true;
-             }
-             if(service.uuid == LED_SERVICE)
-             {
-                 has_led_service = true;
-             }
-             if(service.uuid == DEVICE_INFORMATION_SERVICE)
-             {
-                 has_device_information_service = true;
-             }
-             console.log(&apos;Getting Charateristics for service &apos; + service.uuid);
-             service.getCharacteristics()
-             .then(characteristics =&gt;
-             {
-                 console.log(&apos;&gt; Service: &apos; + service.uuid);
-                 services_discovered++;
-                 characteristics_discovered = 0;
-                 characteristic_count = characteristics.length;
-                 characteristics.forEach(characteristic =&gt;
-                 {
-                     characteristics_discovered++;
-                     console.log(&apos;&gt;&gt; Charateristic: &apos; + characteristic.uuid);
-                     if (characteristic.uuid == ACCELEROMETER_DATA)
-                     {
-                         accelerometer_data=characteristic;
-                         has_accelerometer_data = true;
-                     }
-                     if (characteristic.uuid == LED_MATRIX_STATE)
-                     {
-                         led_matrix_state =characteristic;
-                         has_led_matrix_state = true;
-                     }
-                     if (characteristic.uuid == MODEL_NUMBER_STRING)
-                     {
-                         model_number_string = characteristic;
-                         has_model_name_string = true;
-                     }
-                     if (services_discovered == service_count &amp;&amp; characteristics_discovered == characteristic_count)
-                     {
-                         console.log(&quot;FINISHED DISCOVERY&quot;);
-                         setDiscoveryStatus(true);
-
-                     }
-                 });
-             });
-         });
-     });
- }
-
-&lt;/script&gt;</code></pre><meta name="generator" content="Hexo 4.2.0"></head>
-
-<p>​            </p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/18/%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%8E%B7%E5%8F%96/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/17/%E6%89%AB%E6%8F%8F/">扫描</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><body>
-
-<p>​    <h2></p>
-<p>​      Device Discovery<!--扫描/发现蓝牙设备--></p>
-<p>​    </h2></p>
-<p>​    <button id="btn_scan" onclick="discoverDevices()">Start scan</button></p>
-<p>​    <hr></p>
-<p>​    <h2>Status</h2> <!--显示蓝牙状态--></p>
-<table border="1">
-
- <tr>
-
-  <td> <b>Connected</b></td>
-
-  <td><b>Service Discovery Completed</b></td>
-
- </tr><!--表格第一行-->
-
- <tr>
-
-  <td id="Status_connected"> false </td>
-
-  <td id="Status_discovered"> false </td>
-
- </tr><!--表格第二行-->
-
-</table>
-
-<hr>
-
-<!--<h2>Reading and Writing</h2>
-
-<h3>Write Characteristic - Randomise Lights</h3>
-<button id="btn-write" onclick="randomLEDs()">Randomise LEDs</button>
-
-<hr>-->
-
-  </body></p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%89%AB%E6%8F%8F/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/">服务，特性</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><h2 id="服务，特性"><a href="#服务，特性" class="headerlink" title="服务，特性"></a>服务，特性</h2><img src="C:\Users\ASUS\Pictures\QQ图片20200617153720.png" style="zoom:50%;" />
-
-<p><img src="C:%5CUsers%5CASUS%5Cblog%5Csource_posts%5C%E5%9B%BE%E7%89%87%E9%A1%B9%E7%9B%AE%E4%BA%8C.jpg" alt="图片项目二"></p>
-<h2 id="服务的获取"><a href="#服务的获取" class="headerlink" title="服务的获取"></a>服务的获取</h2><img src="C:\Users\ASUS\blog\source\_posts\screenshot_20200618_202231.png" style="zoom:50%;" />
-
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><!DOCTYPE html>
-
-<html>
-
-  <head>
-
-  <meta name="generator" content="Hexo 4.2.0"></head>
-
-<body>
-
-<p>​    <h2></p>
-<p>​      Status</p>
-<p>​    </h2></p>
-<pre><code>&lt;table border=&quot;1&quot;&gt;</code></pre><p>​      <tr></p>
-<p>​        <td>   <b>Connected</b>    </td></p>
-<p>​        <td>   <b>Service Discovery Completed</b></td></p>
-<p>​      </tr></p>
-<p>​      <tr></p>
-<p>​        <td id="status_connected"> false </td></p>
-<p>​        <td id="status_discovered"> false </td></p>
-<p>​      </tr></p>
-<p>​    </table></p>
-<p>​    <hr></p>
-<p>​    <h2></p>
-<p>​      Device Discovery Or Disconnect</p>
-<p>​    </h2></p>
-<p>​    <button id ="btn_scan" onclick="discoverOrdisconnectDevice()">Start sacn</button></p>
-<p>​    <hr></p>
-<p>​    <h2>Reading and Writing</h2></p>
-<p>​    <h3>Write Charateristic - Randomise Lights</h3></p>
-<p>​    <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button></p>
-<p>​    <hr></p>
-  </body>
-
-</html>
-
-
-
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/17/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/">连接状态和断开连接</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><!DOCTYPE html>
-
-<html> <!--用于定义文档的头部，描述了文档各种属性和信息-->
-
-  <head>
-      <script>
-          function setConnectedStatus(status)  //在第三课基础上添加的函数，设置电脑蓝牙当前的连接状态
-        {
-            connected = status;
-            document.getElementById('status_connected').innerHTML = status;
-            if (status == true)
-            {
-                document.getElementById('btn_scan').innerHTML = "Disconnect";//连接完成之后就需要断开连接，disconnect断开连接
-            }
-            else
-            {
-                document.getElementById('btn_scan').innerHTML = "Discover Devices";
-            }
-        }
-          function discoverOrdisconnectDevices()//第四节课
-     {
-       console.log("discoverOrdisconnectDevices");
-       if(!connected)
-       {
-         discoverDevices();
-       }
-       else
-       {
-         selected_device.gatt.disconnect();//断开连接
-       }
-     }
-
-<pre><code>function onDisconnected()//4课
-{
-  console.log(&quot;onDisconnected&quot;);
-  resetUI();
-}
-function setDiscoveryStatus(status)
-{
-  services_discovered = status;
-  document.getElementById(&apos;statu
- &lt;/script&gt;</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
-
-
-
-
-
-<p>​            </p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/">第二课连接设备</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><!DOCTYPE html>
-
-<html> <!--用于定义文档的头部，描述了文档各种属性和信息-->
-
-  <head>
-       <script>
-            var selected_device ;   //<!--选择用户选择的蓝牙设备-->
-            var connected_server;  //<!--保存用户选择的蓝牙设备-->
-            var   connected = false;
-            function discoverDevices()
-            {  
-             console.log("discoverDevices");//<!--console，log控制台打印输出-->
-             var options = {acceptAllDevices:true}//发现周边蓝牙设备
-             navigator.bluetooth.requestDevice(options)//navigator对象，包含浏览器信息
-            .then(device => {
-            console.log('> Name:' + device.name);
-            console.log('> Id:' + device.id);  
-            console.log('> Connected:' + device.gatt.connected);
-            selected_device =device;
-            console.log(selected_device);
-            connect();
-            })
-            .catch(error => {
-            alert('ERROR ' + error);
-            console.log('ERROR:' + error);
-             });
-     }
-           function connect()///第二节课添加函数
-     { 
-       console.log("connecting");
-       selected_device.gatt.connect()
-       .then(
-                function(server) //表示连接成功
-                {
-                  console.log("Connected to" + server.device.id);
-                  console.log("Connected=" + server.connected);
-                  //selected_device.addEventListener('gattserverdisconnected',onDisconnected);
-
-<pre><code>             connected_server=server;
-             //discoverSvcsAndChars();//第5节课添加函数
-             //setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
-           },
-          function(error)//表示连接失败
-          {
-            console.log(&quot;ERROR:could not connct-&quot; + error);
-            alert(&quot;ERROR:could not connct-&quot; + error);
-            setConnectedStatus(false);
-          }
-         );
-}</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
-
-<p>&lt;/ html&gt;</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/17/%E5%87%86%E5%A4%87%E5%89%8D%E7%9A%84/">准备前的</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><p>一、确认本机上是否安装蓝牙</p>
-<p>●法-:在桌面开始按钮旁的搜索栏中输入bluetooth后回车, 看蓝牙是否打开</p>
-<p>●法二:在chrome浏览器的地址栏中输入chr ome://bluetooth-internals，看是否能发现周边蓝牙设备。上述网址是一个Chrome浏览器的插件, 使用它可以查看电脑周边蓝牙设备的信息:状态、服务、特性、描述符等。</p>
-<img src="C:\Users\ASUS\Pictures\QQ图片20200617152920.png" style="zoom:25%;" />
-
-<img src="C:\Users\ASUS\Pictures\QQ图片20200617153007.png" style="zoom:25%;" />
-
-
-
-<p>二、检查本机系统、chrome 浏览器的版本</p>
-<p>，Chrome的70.0.3526.0及以上。</p>
-<p>窗口关闭按钮的下方-&gt;帮助&gt;关于Google Chrome</p>
-<img src="C:\Users\ASUS\Pictures\QQ图片20200617153545.png" style="zoom:25%;" />
-
-<img src="C:\Users\ASUS\Pictures\QQ图片20200617153636.png" style="zoom:25%;" />
-
-<img src="C:\Users\ASUS\Pictures\QQ图片20200617153720.png" style="zoom:25%;" />
-
-<p>●Windows 10的1703及以上。</p>
-<p>在桌面开始按钮旁的搜索栏中输入winver回车即可查看本机的版本号。注意，在MSDN网站上可以查看/下载Windows.系统的历史版本。</p>
-<p>请注意:网页蓝牙功能并非只有Chrome浏览器支持，其他如Firefox、Safari也都可以。 但网页蓝牙的API及内部实现都是Chrome团队在开发，因此Chrome对该功能支持的最好。不同浏览器对网页蓝牙的实现及支持现状请看这里。</p>
-<p>三、下载固件至开发板</p>
-<p>如果microbit开发板要和我们电脑通过蓝牙来通信,则需要通过程序来启用板子上的蓝牙模块。因此需要下载能够实现该功能的固件，点击这里下载。</p>
-<p>四、测试</p>
-<p>在chr ome浏览器的地址栏中输入chr ome://bluetooth-internals,进入Devices后选择Name为BBCmicro:bit [gitup]的一 -行。若板子上显示字符C,则表示电脑端和板子端正常运行</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E5%87%86%E5%A4%87%E5%89%8D%E7%9A%84/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-
-
-<div id="pagination">
-  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"></a>
 </div>
 
 <footer>
@@ -584,8 +147,6 @@ function setDiscoveryStatus(status)
   </div>
 </footer>
 
-  </div>
-</div>
 </div>
 
 <button class="hamburger hamburger--arrow-r" type="button">
