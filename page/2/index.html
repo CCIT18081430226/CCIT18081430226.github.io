@@ -81,6 +81,108 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/06/16/function%20discoverOrdisconnectDevices()%E7%AC%AC%E5%9B%9B%E8%8A%82%E8%AF%BE/">function discoverOrdisconnectDevices()第四节课</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><p>function discoverOrdisconnectDevices()//第四节课</p>
+<p>   {</p>
+<p>​    console.log(“discoverOrdisconnectDevices”);</p>
+<p>​    if(!connected)</p>
+<p>​    {</p>
+<p>​     discoverDevices();</p>
+<p>​    }</p>
+<p>​    else</p>
+<p>​    {</p>
+<p>​     selected_device.gatt.disconnect();//断开连接</p>
+<p>​    }</p>
+<p>   }</p>
+<p>   function onDisconnected()//4课</p>
+<p>   {</p>
+<p>​    console.log(“onDisconnected”);</p>
+<p>​    resetUI();</p>
+<p>   }</p>
+<p>  function discoverDevices()</p>
+<p>   { </p>
+<p>​    console.log(“discoverDevices”);//<!--console，log控制台打印输出--></p>
+<p>​    var options = {acceptAllDevices:true}</p>
+<p>​    navigator.bluetooth.requestDevice(options)</p>
+<p>​    .then(device =&gt; {</p>
+<p>​      console.log(‘&gt; Name:’ + device.name);</p>
+<p>​      console.log(‘&gt; Id:’ + device.id); </p>
+<p>​      console.log(‘&gt; Connected:’ + device.gatt.connected);</p>
+<p>​      selected_device=device;</p>
+<p>​      console.log(selected_device);</p>
+<p>​      connect();</p>
+<p>​     })</p>
+<p>​    .catch(error =&gt; {</p>
+<p>​      alert(‘ERROR ‘ + error);</p>
+<p>​      console.log(‘ERROR:’ + error);</p>
+<p>​       });</p>
+<p>   }</p>
+<p>   function connect()///第二节课添加函数</p>
+<p>   { </p>
+<p>​    console.log(“connecting”);</p>
+<p>​    selected_device.gatt.connect()</p>
+<p>​    .then(</p>
+<p>​        function(server) //表示连接成功</p>
+<p>​        {</p>
+<p>​         console.log(“Connected to” + server.device.id);</p>
+<p>​         console.log(“Connected=” + server.connected);</p>
+<p>​         selected_device.addEventListener(‘gattserverdisconnected’,onDisconnected);</p>
+<p>​         connected_server=server;</p>
+<p>​         discoverSvcsAndChars();//第5节课添加函数</p>
+<p>​         setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态</p>
+<p>​        },</p>
+<p>​        function(error)//表示连接失败</p>
+<p>​        {</p>
+<p>​         console.log(“ERROR:could not connct-“ + error);</p>
+<p>​         alert(“ERROR:could not connct-“ + error);</p>
+<p>​         setConnectedStatus(false);</p>
+<p>​        }</p>
+<p>​       );</p>
+<p>   }</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/function%20discoverOrdisconnectDevices()%E7%AC%AC%E5%9B%9B%E8%8A%82%E8%AF%BE/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/06/16/var%20%20selected_device%20;%20%20!--%E4%BF%9D%E5%AD%98%E7%94%A8%E6%88%B7%E9%80%89%E6%8B%A9%E7%9A%84%E8%93%9D%E7%89%99%E8%AE%BE%E5%A4%87--/">var  selected_device ;  !--保存用户选择的蓝牙设备--</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
+      <p><p>var  selected_device ;  //<!--保存用户选择的蓝牙设备--></p>
+<p>   var  connected_server;  //在第二节课基础上添加的变量，保存电脑当前蓝牙连接状态</p>
+<p>   var  connected = false;</p>
+<p>   var services_discovered = false;//5接课</p>
+<p>   //5接课</p>
+<p>   //presence of services and characteristics</p>
+<p>   var has_accelerometer_service = false;</p>
+<p>   var has_accelerometer_data = false;</p>
+<p>   var has_led_matrix_state = false;</p>
+<p>   var has_led_matrix_state = false;</p>
+<p>   var has_device_information_service = false;</p>
+<p>   var has_model_number_string = false;</p>
+<p>   //servicers UUIDs</p>
+<p>   ACCELEROMETER_SERVICE = ‘e95d0753-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   LED_SERVICE = ‘e95dd91d-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   DEVICE_INFORMATION_SERVICE = ‘0000180a-0000-1000-8000-00805f9b34fb’;</p>
+<p>   //characteristics UUIDs</p>
+<p>   ACCELEROMETER_DATA = ‘e95dca4b-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   LED_MATRIX_STATE = ‘e95dd91d-251d-470a-a062-fa1922dfa9a8’;</p>
+<p>   MODEL_NUMBER_STRING = ‘00002a24-0000-1000-8000-00805f9b34fb’;</p>
+<p>   //cached characteristics</p>
+<p>   var led_matrix_state</p>
+<p>   var model_number_string;</p>
+<p>   var accelerometer_data;</p>
+<p>   //</p>
+<p>   var service_count;</p>
+<p>   var services_discovered;</p>
+<p>   var characteristic_count;</p>
+<p>   var characteristics_discovered;</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/16/var%20%20selected_device%20;%20%20!--%E4%BF%9D%E5%AD%98%E7%94%A8%E6%88%B7%E9%80%89%E6%8B%A9%E7%9A%84%E8%93%9D%E7%89%99%E8%AE%BE%E5%A4%87--/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/">项目二</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-16</span>
       <p><!DOCTYPE html>
@@ -380,7 +482,7 @@
 
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></p>
-      <div class="post-button"><a class="btn" href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -401,7 +503,7 @@
 <p>四、测试</p>
 <p>在chr ome浏览器的地址栏中输入chr ome://bluetooth-internals,进入Devices后选择Name为BBCmicro:bit [gitup]的一 -行。若板子上显示字符C,则表示电脑端和板子端正常运行。</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/16/%E4%B8%80%E3%80%81%E7%A1%AE%E8%AE%A4%E6%9C%AC%E6%9C%BA%E4%B8%8A%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/16/%E4%B8%80%E3%80%81%E7%A1%AE%E8%AE%A4%E6%9C%AC%E6%9C%BA%E4%B8%8A%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -409,7 +511,7 @@
       <h2 class="title"><a href="/2020/04/03/%E5%AE%89%E8%A3%85hexo/">安装hexo</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-03</span>
       <p></p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/%E5%AE%89%E8%A3%85hexo/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/04/03/%E5%AE%89%E8%A3%85hexo/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -417,7 +519,7 @@
       <h2 class="title"><a href="/2020/04/03/%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87-1/">第一张博文</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-03</span>
       <p></p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87-1/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/04/03/%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87-1/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -436,7 +538,7 @@
 <p>cd blog hexo init</p>
 <p>hexo s</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/04/03/%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -444,7 +546,7 @@
       <h2 class="title"><a href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E5%AE%A2/">我的第一张博客</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-04-03</span>
       <p></p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E5%AE%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E5%AE%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -468,7 +570,7 @@
 </li>
 </ul>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E5%BC%A0%E5%8D%9A%E6%96%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -499,7 +601,7 @@
 <p>cd blog hexo init</p>
 <p>hexo s</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/04/03/hello-world/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/04/03/hello-world/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
 
@@ -541,18 +643,18 @@
   </div>
   <nav class="menu-container">
   <ul class="menu-items">
-    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
-    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
           <li><a href="/guestbook/">Guestbook</a></li>
         <li><a href="/about/">About</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-link fa-fw"></i>Friends</span>
+      <i class="fa fa-link fa-fw"></i>友链</span>
         <ul>
           <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
         </ul>
