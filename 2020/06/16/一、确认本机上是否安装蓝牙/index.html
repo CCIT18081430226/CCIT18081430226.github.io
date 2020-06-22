@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>服务的获取 | Hexo</title>
+  <title>一、确认本机上是否安装蓝牙 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="北音执念">
   <meta name="keywords" content="">
@@ -60,7 +60,7 @@
   
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 <body>
 <div class="single">
 
@@ -69,8 +69,8 @@
   <div class="overlay">
   <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
-    <span>2020-06-22</span>
-    <h2>服务的获取</h2>
+    <span>2020-06-16</span>
+    <h2>一、确认本机上是否安装蓝牙</h2>
     
     </div>
 </div>
@@ -80,84 +80,19 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <p>在遇到服务特性之前一路顺风，在遇到之后一路坎坷。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><!DOCTYPE html>
-
-<html>
-
-  <head>
-
-<pre><code> &lt;script&gt;
-     function discoverSvcsAndChars()
- {
-     console.log(&quot;discoverSvcsAndChars server=&quot; + connected_server);
-     connected_server.getPrimaryServices()
-     .then(services =&gt;
-     {
-         has_accelerometer_service = false;
-         has_led_service = false;
-         has_device_information_service = false;
-
-         services_discovered = 0;
-         service_count = services.length;
-         console.log(&quot;Got &quot; + service_count + &quot; services&quot;);
-
-         services.forEach(service =&gt;
-         {
-             if (service.uuid == ACCELEROMETER_SERVICE)
-             {
-                 has_accelerometer_service = true;
-             }
-             if(service.uuid == LED_SERVICE)
-             {
-                 has_led_service = true;
-             }
-             if(service.uuid == DEVICE_INFORMATION_SERVICE)
-             {
-                 has_device_information_service = true;
-             }
-             console.log(&apos;Getting Charateristics for service &apos; + service.uuid);
-             service.getCharacteristics()
-             .then(characteristics =&gt;
-             {
-                 console.log(&apos;&gt; Service: &apos; + service.uuid);
-                 services_discovered++;
-                 characteristics_discovered = 0;
-                 characteristic_count = characteristics.length;
-                 characteristics.forEach(characteristic =&gt;
-                 {
-                     characteristics_discovered++;
-                     console.log(&apos;&gt;&gt; Charateristic: &apos; + characteristic.uuid);
-                     if (characteristic.uuid == ACCELEROMETER_DATA)
-                     {
-                         accelerometer_data=characteristic;
-                         has_accelerometer_data = true;
-                     }
-                     if (characteristic.uuid == LED_MATRIX_STATE)
-                     {
-                         led_matrix_state =characteristic;
-                         has_led_matrix_state = true;
-                     }
-                     if (characteristic.uuid == MODEL_NUMBER_STRING)
-                     {
-                         model_number_string = characteristic;
-                         has_model_name_string = true;
-                     }
-                     if (services_discovered == service_count &amp;&amp; characteristics_discovered == characteristic_count)
-                     {
-                         console.log(&quot;FINISHED DISCOVERY&quot;);
-                         setDiscoveryStatus(true);
-
-                     }
-                 });
-             });
-         });
-     });
- }
-
-&lt;/script&gt;</code></pre><meta name="generator" content="Hexo 4.2.0"></head>
-
-<p>​            </p>
+        <p>一、确认本机上是否安装蓝牙</p>
+<p>●法-:在桌面开始按钮旁的搜索栏中输入bluetooth后回车, 看蓝牙是否打开。</p>
+<p>●法二:在chrome浏览器的地址栏中输入chr ome://bluetooth-internals，看是否能发现周边蓝牙设备。上述网址是一个Chrome浏览器的插件, 使用它可以查看电脑周边蓝牙设备的信息:状态、服务、特性、描述符等。</p>
+<p>二、检查本机系统、chrome 浏览器的版本</p>
+<p>，Chrome的70.0.3526.0及以上。</p>
+<p>窗口关闭按钮的下方-&gt;帮助&gt;关于Google Chrome</p>
+<p>●Windows 10的1703及以上。</p>
+<p>在桌面开始按钮旁的搜索栏中输入winver回车即可查看本机的版本号。注意，在MSDN网站上可以查看/下载Windows.系统的历史版本。</p>
+<p>请注意:网页蓝牙功能并非只有Chrome浏览器支持，其他如Firefox、Safari也都可以。 但网页蓝牙的API及内部实现都是Chrome团队在开发，因此Chrome对该功能支持的最好。不同浏览器对网页蓝牙的实现及支持现状请看这里。</p>
+<p>三、下载固件至开发板</p>
+<p>如果microbit开发板要和我们电脑通过蓝牙来通信,则需要通过程序来启用板子上的蓝牙模块。因此需要下载能够实现该功能的固件，点击这里下载。</p>
+<p>四、测试</p>
+<p>在chr ome浏览器的地址栏中输入chr ome://bluetooth-internals,进入Devices后选择Name为BBCmicro:bit [gitup]的一 -行。若板子上显示字符C,则表示电脑端和板子端正常运行。</p>
 
       </div>
     </div>
@@ -166,12 +101,12 @@
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/06/22/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/">
+		<a class="copy" href="/2020/06/16/%E9%A1%B9%E7%9B%AE%E4%BA%8C/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>连接状态和断开连接</h3>
+						<h3>项目二</h3>
 					</div>
 				</div>
 			</div>
@@ -179,12 +114,12 @@
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/06/22/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/">
+		<a class="copy" href="/2020/04/03/%E5%AE%89%E8%A3%85hexo/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>服务，特性</h3>
+						<h3>安装hexo</h3>
 					</div>
 				</div>
 			</div>
