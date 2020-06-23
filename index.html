@@ -81,400 +81,13 @@
 
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2020/06/22/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/">连接状态和断开连接</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-22</span>
-      <p><!DOCTYPE html>
+      <h2 class="title"><a href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/">服务特性</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-23</span>
+      <p><h2 id="服务特性"><a href="#服务特性" class="headerlink" title="服务特性"></a>服务特性</h2><img src="C:\Users\ASUS\Pictures\QQ图片20200617153720.png" style="zoom:50%;" />
 
-<html> <!--用于定义文档的头部，描述了文档各种属性和信息-->
-
-  <head>
-      <script>
-          function setConnectedStatus(status)  //在第三课基础上添加的函数，设置电脑蓝牙当前的连接状态
-        {
-            connected = status;
-            document.getElementById('status_connected').innerHTML = status;
-            if (status == true)
-            {
-                document.getElementById('btn_scan').innerHTML = "Disconnect";//连接完成之后就需要断开连接，disconnect断开连接
-            }
-            else
-            {
-                document.getElementById('btn_scan').innerHTML = "Discover Devices";
-            }
-        }
-          function discoverOrdisconnectDevices()//第四节课
-     {
-       console.log("discoverOrdisconnectDevices");
-       if(!connected)
-       {
-         discoverDevices();
-       }
-       else
-       {
-         selected_device.gatt.disconnect();//断开连接
-       }
-     }
-
-<pre><code>function onDisconnected()//4课
-{
-  console.log(&quot;onDisconnected&quot;);
-  resetUI();
-}
-function setDiscoveryStatus(status)
-{
-  services_discovered = status;
-  document.getElementById(&apos;statu
- &lt;/script&gt;</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
-
-
-
-
-
-<p>​            </p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/22/%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E8%AF%BB%E5%86%991/">读写1</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><!DOCTYPE html>
-<html>
-    <head>
-        <script>
-        var    selected_device;//<!--选择用户选择的蓝牙设备-->
-        var    connected_server;//<!--保存用户选择的蓝牙设备-->
-        var    connected = false;
-        var    services_discovered= false;
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"> //5接课</span><br><span class="line">//presence of services and characteristics</span><br><span class="line">var has_accelerometer_service = false;</span><br><span class="line">var has_accelerometer_data = false;</span><br><span class="line">var has_led_service = false;</span><br><span class="line">var has_led_matrix_state = false;</span><br><span class="line">var has_device_information_service = false;</span><br><span class="line">var has_model_name_string = false;</span><br><span class="line"></span><br><span class="line">//servicers UUIDs</span><br><span class="line">ACCELEROMETER_SERVICE = 'e95d0753-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">LED_SERVICE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">DEVICE_INFORMATION_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb';</span><br><span class="line">TEMPERATURE_SERVICE = 'e95d6100-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">//characteristics UUIDs</span><br><span class="line">ACCELEROMETER_DATA = 'e95dca4b-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">LED_MATRIX_STATE = 'e95d7b77-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">MODEL_NUMBER_STRING = '00002a24-0000-1000-8000-00805f9b34fb';</span><br><span class="line">TEMPERATURE = 'e95d9250-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">//cached characteristics</span><br><span class="line">var led_matrix_state;</span><br><span class="line">var model_number_string;</span><br><span class="line">var accelerometer_data;</span><br><span class="line"></span><br><span class="line">var service_count;</span><br><span class="line">var services_discovered;</span><br><span class="line">var characteristics_discovered;</span><br><span class="line">var characteristic_count ;</span><br><span class="line"></span><br><span class="line">function discoverDevices()//发现蓝牙设备</span><br><span class="line">&#123;</span><br><span class="line">    console.log("discoverDevices");//<span class="comment">&lt;!--console，log控制台打印输出--&gt;</span></span><br><span class="line">    var options = &#123;acceptAllDevices:true,</span><br><span class="line">        optionalServices: [DEVICE_INFORMATION_SERVICE,ACCELEROMETER_SERVICE,LED_SERVICE]</span><br><span class="line">    &#125;</span><br><span class="line">    navigator.bluetooth.requestDevice(options)</span><br><span class="line">    .then(device =&gt; &#123;</span><br><span class="line">        console.log('&gt; Name:' + device.name);</span><br><span class="line">        console.log('&gt; Id:' + device.id);</span><br><span class="line">        console.log('&gt; Connected:' + device.gatt.connected);</span><br><span class="line">        selected_device = device;</span><br><span class="line">        console.log(selected_device);</span><br><span class="line">        connect();</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(error =&gt; &#123;</span><br><span class="line">        alert('ERROR:' + error);</span><br><span class="line">        console.log('ERROR:' + error);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function connect()//第二节课添加函数</span><br><span class="line">&#123;</span><br><span class="line">    console.log("connecting");</span><br><span class="line">    selected_device.gatt.connect()</span><br><span class="line">    .then(</span><br><span class="line">        function (server)//表示连接成功</span><br><span class="line">        &#123;</span><br><span class="line">            console.log("Connected to" + server.device.id);</span><br><span class="line">            console.log("Connected=" + server.connected);</span><br><span class="line">            selected_device.addEventListener( 'gattserverdisconnected' ,onDisconnected);//监听器</span><br><span class="line">            </span><br><span class="line">            connected_server = server;</span><br><span class="line">            discoverSvcsAndChars();</span><br><span class="line">           // discoverDevicesOrDisconnect();</span><br><span class="line">           // readModelNumber();</span><br><span class="line">           // randomLEDs();</span><br><span class="line">            //toggleAccelerometerNotifications();</span><br><span class="line">            setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态/调用蓝牙连接状</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        function (error)</span><br><span class="line">        &#123;</span><br><span class="line">            console.log("ERROR:could not connct-" + error);</span><br><span class="line">            alert("ERROR:could not connct-" + error);</span><br><span class="line">            setConnectedStatus(false);//调用蓝牙连接状态</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">  function discoverOrdisconnectDevice()//重写断开连接</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("discoverOrdisconnectDevice");</span><br><span class="line">      if(!connected)</span><br><span class="line">          discoverDevices();</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">          selected_device.gatt.disconnect();//断开连接</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function onDisconnected()</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("onDisconnected");</span><br><span class="line">      resetUI();</span><br><span class="line">  &#125;</span><br><span class="line">  function setConnectedStatus(status) //连接状态</span><br><span class="line">  &#123;</span><br><span class="line">      connected = status;</span><br><span class="line">      document.getElementById('status_connected').innerHTML = status;</span><br><span class="line">      if (status == true)</span><br><span class="line">      &#123;</span><br><span class="line">          document.getElementById('btn_scan').innerHTML = "Disconnect";</span><br><span class="line">      &#125;</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">          document.getElementById('btn_scan').innerHTML = "Discover Devices";</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  function setDiscoveryStatus(status)</span><br><span class="line">  &#123;</span><br><span class="line">      services_discovered = status;</span><br><span class="line">      document.getElementById('status_discovered').innerHTML = status;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  function resetUI()</span><br><span class="line">  &#123;</span><br><span class="line">      setConnectedStatus(false);</span><br><span class="line">      setDiscoveryStatus(false);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function discoverSvcsAndChars()</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("discoverSvcsAndChars server=" + connected_server);</span><br><span class="line">      connected_server.getPrimaryServices()</span><br><span class="line">      .then(services =&gt;</span><br><span class="line">      &#123;</span><br><span class="line">          has_accelerometer_service = false;</span><br><span class="line">          has_led_service = false;</span><br><span class="line">          has_device_information_service = false;</span><br><span class="line"></span><br><span class="line">          services_discovered = 0;</span><br><span class="line">          service_count = services.length;</span><br><span class="line">          console.log("Got " + service_count + " services");</span><br><span class="line"></span><br><span class="line">          services.forEach(service =&gt;</span><br><span class="line">          &#123;</span><br><span class="line">              if (service.uuid == ACCELEROMETER_SERVICE)</span><br><span class="line">              &#123;</span><br><span class="line">                  has_accelerometer_service = true;</span><br><span class="line">              &#125;</span><br><span class="line">              if(service.uuid == LED_SERVICE)</span><br><span class="line">              &#123;</span><br><span class="line">                  has_led_service = true;</span><br><span class="line">              &#125;</span><br><span class="line">              if(service.uuid == DEVICE_INFORMATION_SERVICE)</span><br><span class="line">              &#123;</span><br><span class="line">                  has_device_information_service = true;</span><br><span class="line">              &#125;</span><br><span class="line">              console.log('Getting Charateristics for service ' + service.uuid);</span><br><span class="line">              service.getCharacteristics()</span><br><span class="line">              .then(characteristics =&gt;</span><br><span class="line">              &#123;</span><br><span class="line">                  console.log('&gt; Service: ' + service.uuid);</span><br><span class="line">                  services_discovered++;</span><br><span class="line">                  characteristics_discovered = 0;</span><br><span class="line">                  characteristic_count = characteristics.length;</span><br><span class="line">                  characteristics.forEach(characteristic =&gt;</span><br><span class="line">                  &#123;</span><br><span class="line">                      characteristics_discovered++;</span><br><span class="line">                      console.log('&gt;&gt; Charateristic: ' + characteristic.uuid);</span><br><span class="line">                      if (characteristic.uuid == ACCELEROMETER_DATA)</span><br><span class="line">                      &#123;</span><br><span class="line">                          accelerometer_data=characteristic;</span><br><span class="line">                          has_accelerometer_data = true;</span><br><span class="line">                      &#125;</span><br><span class="line">                      if (characteristic.uuid == LED_MATRIX_STATE)</span><br><span class="line">                      &#123;</span><br><span class="line">                          led_matrix_state =characteristic;</span><br><span class="line">                          has_led_matrix_state = true;</span><br><span class="line">                      &#125;</span><br><span class="line">                      if (characteristic.uuid == MODEL_NUMBER_STRING)</span><br><span class="line">                      &#123;</span><br><span class="line">                          model_number_string = characteristic;</span><br><span class="line">                          has_model_name_string = true;</span><br><span class="line">                      &#125;</span><br><span class="line">                      if (services_discovered == service_count &amp;&amp; characteristics_discovered == characteristic_count)</span><br><span class="line">                      &#123;</span><br><span class="line">                          console.log("FINISHED DISCOVERY");</span><br><span class="line">                          setDiscoveryStatus(true);</span><br><span class="line"></span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;);</span><br><span class="line">              &#125;);</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function randomLEDs()</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("randomLEDs");</span><br><span class="line"></span><br><span class="line">      if (!connected)</span><br><span class="line">      &#123;</span><br><span class="line">          alert("Error: Discover and connect to a device before using this function");</span><br><span class="line">          return</span><br><span class="line">      &#125;</span><br><span class="line">      if (!services_discovered)</span><br><span class="line">&#123;</span><br><span class="line">	   alert("Error: Service discovery has not yet completed");</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_service)</span><br><span class="line">&#123;</span><br><span class="line">	   alert("Error: The connected device does not contain the LED service");</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_matrix_state)</span><br><span class="line">&#123;</span><br><span class="line">	   alert("Error: The connected device does not contain the LED matrix state characteristic");</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">      var led_array = [0, 0, 0, 0, 0];</span><br></pre></td></tr></table></figure>
-
-
-<p>​            </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">      // Math.random():0~1  Math.floor(x):返回小于等于x的最大整数</span><br><span class="line"></span><br><span class="line">    led_array[0] = Math.floor(Math.random() * 32);</span><br><span class="line"> led_array[1] = 2;</span><br><span class="line"> led_array[2] = 5;</span><br><span class="line"> led_array[3] = 1;</span><br><span class="line"> led_array[4] = 3;</span><br><span class="line"></span><br><span class="line">    var led_matrix_data = new Uint8Array(led_array);</span><br><span class="line"></span><br><span class="line">    led_matrix_state.writeValue(led_matrix_data.buffer)</span><br><span class="line">    .then(_ =&gt; &#123;</span><br><span class="line"> console.log('LED matrix state changed');</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(error =&gt;&#123;</span><br><span class="line">        console.log('Error '+ error);</span><br><span class="line">        alert('Error: ' + error); return;</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function readModelNumber() &#123;</span><br><span class="line">    console.log("readModelNumber");</span><br><span class="line">    // state validation</span><br><span class="line">    if (!connected) &#123;</span><br><span class="line">        alert("Error: Discover and connect to a device before using this function");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!services_discovered) &#123;</span><br><span class="line">        alert("Error: Service discovery has not yet completed");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!has_device_information_service) &#123;</span><br><span class="line">        alert("Error: The connected device does not contain the device information service ");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!has_model_name_string) &#123;</span><br><span class="line">        alert("Error: The connected device does not contain the model name string  characteristic ");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    model_number_string.readValue()</span><br><span class="line">        .then(value =&gt; &#123;</span><br><span class="line">            data = new Uint8Array(value.buffer);</span><br><span class="line">            model_number_string = new TextDecoder("utf-8").decode(data);</span><br><span class="line">            console.log(model_number_string);</span><br><span class="line">            document.getElementById("model_number").innerHTML =</span><br><span class="line">                model_number_string;</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(error =&gt; &#123;</span><br><span class="line">            console.log('Error: ' + error);</span><br><span class="line">            alert('Error: ' + error);</span><br><span class="line">            return;</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">     <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span></span><br><span class="line">        Status</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>      <span class="tag">&lt;<span class="name">b</span>&gt;</span>Connected<span class="tag">&lt;/<span class="name">b</span>&gt;</span>        <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>     <span class="tag">&lt;<span class="name">b</span>&gt;</span>Service Discovery Completed<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">"status_connected"</span>&gt;</span> false  <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">"status_discovered"</span>&gt;</span> false <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span></span><br><span class="line">        Device Discovery Or Disconnect</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> =<span class="string">"btn_scan"</span> <span class="attr">onclick</span>=<span class="string">"discoverOrdisconnectDevice()"</span>&gt;</span>Start sacn<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Reading and Writing<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Read Characteristic - Model Number<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn_read"</span> <span class="attr">onclick</span>=<span class="string">"readModelNumber()"</span>&gt;</span>Read Model Number<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"model_number"</span>&gt;</span>BBC micro:bit<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Write Characteristic - Randomise Lights<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn_write"</span> <span class="attr">onclick</span>=<span class="string">"randomLEDs()"</span>&gt;</span>Randomise LEDs<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</html>
-
-<img src="C:\Users\ASUS\blog\source\_posts\读写.png" style="zoom:67%;" />
-
-<p><img src="C:%5CUsers%5CASUS%5Cblog%5Csource_posts%5CIMG20200621145319.jpg" alt=""></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E8%AF%BB%E5%86%991/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E8%AF%BB%E5%86%99/">读写</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><!DOCTYPE html>
-<html>
-    <head>
-        <script>
-        var    selected_device;//<!--选择用户选择的蓝牙设备-->
-        var    connected_server;//<!--保存用户选择的蓝牙设备-->
-        var    connected = false;
-        var    services_discovered= false;
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"> //5接课</span><br><span class="line">//presence of services and characteristics</span><br><span class="line">var has_accelerometer_service = false;</span><br><span class="line">var has_accelerometer_data = false;</span><br><span class="line">var has_led_service = false;</span><br><span class="line">var has_led_matrix_state = false;</span><br><span class="line">var has_device_information_service = false;</span><br><span class="line">var has_model_name_string = false;</span><br><span class="line"></span><br><span class="line">//servicers UUIDs</span><br><span class="line">ACCELEROMETER_SERVICE = 'e95d0753-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">LED_SERVICE = 'e95dd91d-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">DEVICE_INFORMATION_SERVICE = '0000180a-0000-1000-8000-00805f9b34fb';</span><br><span class="line">TEMPERATURE_SERVICE = 'e95d6100-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">//characteristics UUIDs</span><br><span class="line">ACCELEROMETER_DATA = 'e95dca4b-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">LED_MATRIX_STATE = 'e95d7b77-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">MODEL_NUMBER_STRING = '00002a24-0000-1000-8000-00805f9b34fb';</span><br><span class="line">TEMPERATURE = 'e95d9250-251d-470a-a062-fa1922dfa9a8';</span><br><span class="line">//cached characteristics</span><br><span class="line">var led_matrix_state;</span><br><span class="line">var model_number_string;</span><br><span class="line">var accelerometer_data;</span><br><span class="line"></span><br><span class="line">var service_count;</span><br><span class="line">var services_discovered;</span><br><span class="line">var characteristics_discovered;</span><br><span class="line">var characteristic_count ;</span><br><span class="line"></span><br><span class="line">function discoverDevices()//发现蓝牙设备</span><br><span class="line">&#123;</span><br><span class="line">    console.log("discoverDevices");//<span class="comment">&lt;!--console，log控制台打印输出--&gt;</span></span><br><span class="line">    var options = &#123;acceptAllDevices:true,</span><br><span class="line">        optionalServices: [DEVICE_INFORMATION_SERVICE,ACCELEROMETER_SERVICE,LED_SERVICE]</span><br><span class="line">    &#125;</span><br><span class="line">    navigator.bluetooth.requestDevice(options)</span><br><span class="line">    .then(device =&gt; &#123;</span><br><span class="line">        console.log('&gt; Name:' + device.name);</span><br><span class="line">        console.log('&gt; Id:' + device.id);</span><br><span class="line">        console.log('&gt; Connected:' + device.gatt.connected);</span><br><span class="line">        selected_device = device;</span><br><span class="line">        console.log(selected_device);</span><br><span class="line">        connect();</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(error =&gt; &#123;</span><br><span class="line">        alert('ERROR:' + error);</span><br><span class="line">        console.log('ERROR:' + error);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function connect()//第二节课添加函数</span><br><span class="line">&#123;</span><br><span class="line">    console.log("connecting");</span><br><span class="line">    selected_device.gatt.connect()</span><br><span class="line">    .then(</span><br><span class="line">        function (server)//表示连接成功</span><br><span class="line">        &#123;</span><br><span class="line">            console.log("Connected to" + server.device.id);</span><br><span class="line">            console.log("Connected=" + server.connected);</span><br><span class="line">            selected_device.addEventListener( 'gattserverdisconnected' ,onDisconnected);//监听器</span><br><span class="line">            </span><br><span class="line">            connected_server = server;</span><br><span class="line">            discoverSvcsAndChars();</span><br><span class="line">           // discoverDevicesOrDisconnect();</span><br><span class="line">           // readModelNumber();</span><br><span class="line">           // randomLEDs();</span><br><span class="line">            //toggleAccelerometerNotifications();</span><br><span class="line">            setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态/调用蓝牙连接状</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        function (error)</span><br><span class="line">        &#123;</span><br><span class="line">            console.log("ERROR:could not connct-" + error);</span><br><span class="line">            alert("ERROR:could not connct-" + error);</span><br><span class="line">            setConnectedStatus(false);//调用蓝牙连接状态</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">  function discoverOrdisconnectDevice()//重写断开连接</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("discoverOrdisconnectDevice");</span><br><span class="line">      if(!connected)</span><br><span class="line">          discoverDevices();</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">          selected_device.gatt.disconnect();//断开连接</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function onDisconnected()</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("onDisconnected");</span><br><span class="line">      resetUI();</span><br><span class="line">  &#125;</span><br><span class="line">  function setConnectedStatus(status) //连接状态</span><br><span class="line">  &#123;</span><br><span class="line">      connected = status;</span><br><span class="line">      document.getElementById('status_connected').innerHTML = status;</span><br><span class="line">      if (status == true)</span><br><span class="line">      &#123;</span><br><span class="line">          document.getElementById('btn_scan').innerHTML = "Disconnect";</span><br><span class="line">      &#125;</span><br><span class="line">      else</span><br><span class="line">      &#123;</span><br><span class="line">          document.getElementById('btn_scan').innerHTML = "Discover Devices";</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  function setDiscoveryStatus(status)</span><br><span class="line">  &#123;</span><br><span class="line">      services_discovered = status;</span><br><span class="line">      document.getElementById('status_discovered').innerHTML = status;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  function resetUI()</span><br><span class="line">  &#123;</span><br><span class="line">      setConnectedStatus(false);</span><br><span class="line">      setDiscoveryStatus(false);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function discoverSvcsAndChars()</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("discoverSvcsAndChars server=" + connected_server);</span><br><span class="line">      connected_server.getPrimaryServices()</span><br><span class="line">      .then(services =&gt;</span><br><span class="line">      &#123;</span><br><span class="line">          has_accelerometer_service = false;</span><br><span class="line">          has_led_service = false;</span><br><span class="line">          has_device_information_service = false;</span><br><span class="line"></span><br><span class="line">          services_discovered = 0;</span><br><span class="line">          service_count = services.length;</span><br><span class="line">          console.log("Got " + service_count + " services");</span><br><span class="line"></span><br><span class="line">          services.forEach(service =&gt;</span><br><span class="line">          &#123;</span><br><span class="line">              if (service.uuid == ACCELEROMETER_SERVICE)</span><br><span class="line">              &#123;</span><br><span class="line">                  has_accelerometer_service = true;</span><br><span class="line">              &#125;</span><br><span class="line">              if(service.uuid == LED_SERVICE)</span><br><span class="line">              &#123;</span><br><span class="line">                  has_led_service = true;</span><br><span class="line">              &#125;</span><br><span class="line">              if(service.uuid == DEVICE_INFORMATION_SERVICE)</span><br><span class="line">              &#123;</span><br><span class="line">                  has_device_information_service = true;</span><br><span class="line">              &#125;</span><br><span class="line">              console.log('Getting Charateristics for service ' + service.uuid);</span><br><span class="line">              service.getCharacteristics()</span><br><span class="line">              .then(characteristics =&gt;</span><br><span class="line">              &#123;</span><br><span class="line">                  console.log('&gt; Service: ' + service.uuid);</span><br><span class="line">                  services_discovered++;</span><br><span class="line">                  characteristics_discovered = 0;</span><br><span class="line">                  characteristic_count = characteristics.length;</span><br><span class="line">                  characteristics.forEach(characteristic =&gt;</span><br><span class="line">                  &#123;</span><br><span class="line">                      characteristics_discovered++;</span><br><span class="line">                      console.log('&gt;&gt; Charateristic: ' + characteristic.uuid);</span><br><span class="line">                      if (characteristic.uuid == ACCELEROMETER_DATA)</span><br><span class="line">                      &#123;</span><br><span class="line">                          accelerometer_data=characteristic;</span><br><span class="line">                          has_accelerometer_data = true;</span><br><span class="line">                      &#125;</span><br><span class="line">                      if (characteristic.uuid == LED_MATRIX_STATE)</span><br><span class="line">                      &#123;</span><br><span class="line">                          led_matrix_state =characteristic;</span><br><span class="line">                          has_led_matrix_state = true;</span><br><span class="line">                      &#125;</span><br><span class="line">                      if (characteristic.uuid == MODEL_NUMBER_STRING)</span><br><span class="line">                      &#123;</span><br><span class="line">                          model_number_string = characteristic;</span><br><span class="line">                          has_model_name_string = true;</span><br><span class="line">                      &#125;</span><br><span class="line">                      if (services_discovered == service_count &amp;&amp; characteristics_discovered == characteristic_count)</span><br><span class="line">                      &#123;</span><br><span class="line">                          console.log("FINISHED DISCOVERY");</span><br><span class="line">                          setDiscoveryStatus(true);</span><br><span class="line"></span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;);</span><br><span class="line">              &#125;);</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function randomLEDs()</span><br><span class="line">  &#123;</span><br><span class="line">      console.log("randomLEDs");</span><br><span class="line"></span><br><span class="line">      if (!connected)</span><br><span class="line">      &#123;</span><br><span class="line">          alert("Error: Discover and connect to a device before using this function");</span><br><span class="line">          return</span><br><span class="line">      &#125;</span><br><span class="line">      if (!services_discovered)</span><br><span class="line">&#123;</span><br><span class="line">	   alert("Error: Service discovery has not yet completed");</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_service)</span><br><span class="line">&#123;</span><br><span class="line">	   alert("Error: The connected device does not contain the LED service");</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_matrix_state)</span><br><span class="line">&#123;</span><br><span class="line">	   alert("Error: The connected device does not contain the LED matrix state characteristic");</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">      var led_array = [0, 0, 0, 0, 0];</span><br></pre></td></tr></table></figure>
-
-
-<p>​            </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">      // Math.random():0~1  Math.floor(x):返回小于等于x的最大整数</span><br><span class="line"></span><br><span class="line">    led_array[0] = Math.floor(Math.random() * 32);</span><br><span class="line"> led_array[1] = 2;</span><br><span class="line"> led_array[2] = 5;</span><br><span class="line"> led_array[3] = 1;</span><br><span class="line"> led_array[4] = 3;</span><br><span class="line"></span><br><span class="line">    var led_matrix_data = new Uint8Array(led_array);</span><br><span class="line"></span><br><span class="line">    led_matrix_state.writeValue(led_matrix_data.buffer)</span><br><span class="line">    .then(_ =&gt; &#123;</span><br><span class="line"> console.log('LED matrix state changed');</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(error =&gt;&#123;</span><br><span class="line">        console.log('Error '+ error);</span><br><span class="line">        alert('Error: ' + error); return;</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function readModelNumber() &#123;</span><br><span class="line">    console.log("readModelNumber");</span><br><span class="line">    // state validation</span><br><span class="line">    if (!connected) &#123;</span><br><span class="line">        alert("Error: Discover and connect to a device before using this function");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!services_discovered) &#123;</span><br><span class="line">        alert("Error: Service discovery has not yet completed");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!has_device_information_service) &#123;</span><br><span class="line">        alert("Error: The connected device does not contain the device information service ");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!has_model_name_string) &#123;</span><br><span class="line">        alert("Error: The connected device does not contain the model name string  characteristic ");</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    model_number_string.readValue()</span><br><span class="line">        .then(value =&gt; &#123;</span><br><span class="line">            data = new Uint8Array(value.buffer);</span><br><span class="line">            model_number_string = new TextDecoder("utf-8").decode(data);</span><br><span class="line">            console.log(model_number_string);</span><br><span class="line">            document.getElementById("model_number").innerHTML =</span><br><span class="line">                model_number_string;</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(error =&gt; &#123;</span><br><span class="line">            console.log('Error: ' + error);</span><br><span class="line">            alert('Error: ' + error);</span><br><span class="line">            return;</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">     <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span></span><br><span class="line">        Status</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>      <span class="tag">&lt;<span class="name">b</span>&gt;</span>Connected<span class="tag">&lt;/<span class="name">b</span>&gt;</span>        <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>     <span class="tag">&lt;<span class="name">b</span>&gt;</span>Service Discovery Completed<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">"status_connected"</span>&gt;</span> false  <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">"status_discovered"</span>&gt;</span> false <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span></span><br><span class="line">        Device Discovery Or Disconnect</span><br><span class="line">    <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span> =<span class="string">"btn_scan"</span> <span class="attr">onclick</span>=<span class="string">"discoverOrdisconnectDevice()"</span>&gt;</span>Start sacn<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Reading and Writing<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Read Characteristic - Model Number<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn_read"</span> <span class="attr">onclick</span>=<span class="string">"readModelNumber()"</span>&gt;</span>Read Model Number<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"model_number"</span>&gt;</span>BBC micro:bit<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Write Characteristic - Randomise Lights<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn_write"</span> <span class="attr">onclick</span>=<span class="string">"randomLEDs()"</span>&gt;</span>Randomise LEDs<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</html>
-
-<img src="C:\Users\ASUS\blog\source\_posts\读写.png" style="zoom:67%;" />
-
-<p><img src="C:%5CUsers%5CASUS%5Cblog%5Csource_posts%5CIMG20200621145319.jpg" alt=""></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E8%AF%BB%E5%86%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E7%89%B9%E6%80%A7%E5%86%99/">特性写</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><!DOCTYPE html>
-
-<html>
-
-  <head>
-       <h2>Reading and Writing</h2>
-        <h3>Write Charateristic - Randomise Lights</h3>
-        <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button>
-        <hr>
-  <meta name="generator" content="Hexo 4.2.0"></head>
-
-
-
-<pre><code>&lt;script&gt;
-    function randomLEDs()
-{
-    console.log(&quot;randomLEDs&quot;);
-
-    if (!connected)
-    {
-        alert(&quot;Error: Discover and connect to a device before using this function&quot;);
-        return
-    }
-    if (!services_discovered)
-    {
-           alert(&quot;Error: Service discovery has not yet completed&quot;);
-           return
-    }
-   if (!has_led_service)
-    {
-           alert(&quot;Error: The connected device does not contain the LED service&quot;);
-           return
-    }
-   if (!has_led_matrix_state)
-    {
-           alert(&quot;Error: The connected device does not contain the LED matrix state characteristic&quot;);
-           return;
-    }
-    var led_array = [0, 0, 0, 0, 0];
-
-
-    led_array[0] = Math.floor(Math.random() * 32);
-    led_array[1] = 1;
-    led_array[2] = 2;
-    led_array[3] = 3;
-    led_array[4] = 4;
-
-    var led_matrix_data = new Uint8Array(led_array);
-
-    led_matrix_state.writeValue(led_matrix_data.buffer)
-    .then(_ =&gt; {
-       console.log(&apos;LED matrix state changed&apos;);
-    })
-    .catch(error =&gt;{
-        console.log(&apos;Error &apos;+ error);
-        alert(&apos;Error: &apos; + error); return;
-     });
-}
-&lt;/script&gt;</code></pre><p>​            </p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E7%89%B9%E6%80%A7%E5%86%99/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A71/">写特性1</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><h2>Reading and Writing</h2>
-
-<p>​    <h3>Write Charateristic - Randomise Lights</h3></p>
-<p>​    <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button></p>
-<p>​    <hr></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A71/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A7/">写特性</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-21</span>
-      <p><p>function randomLEDs()</p>
-<p>​    {</p>
-<p>​      console.log(“randomLEDs”);</p>
-<p>​      if (!connected)</p>
-<p>​      {</p>
-<p>​        alert(“Error: Discover and connect to a device before using this function”);</p>
-<p>​        return</p>
-<p>​      }</p>
-<p>​      if (!services_discovered)</p>
-<p>​      {</p>
-<p>​          alert(“Error: Service discovery has not yet completed”);</p>
-<p>​          return</p>
-<p>​      }</p>
-<p>​      if (!has_led_service)</p>
-<p>​      {</p>
-<p>​          alert(“Error: The connected device does not contain the LED service”);</p>
-<p>​          return</p>
-<p>​      }</p>
-<p>​      if (!has_led_matrix_state)</p>
-<p>​      {</p>
-<p>​          alert(“Error: The connected device does not contain the LED matrix state characteristic”);</p>
-<p>​          return;</p>
-<p>​      }</p>
-<p>​      var led_array = [0, 0, 0, 0, 0];</p>
-<p>​      </p>
-<p>​      </p>
-<p>​      led_array[0] = Math.floor(Math.random() * 32);</p>
-<p>​      led_array[1] = 1;</p>
-<p>​      led_array[2] = 2;</p>
-<p>​      led_array[3] = 3;</p>
-<p>​      led_array[4] = 4;</p>
-<p>​      var led_matrix_data = new Uint8Array(led_array);</p>
-<p>​      led_matrix_state.writeValue(led_matrix_data.buffer)</p>
-<p>​      .then(_ =&gt; {</p>
-<p>​        console.log(‘LED matrix state changed’);</p>
-<p>​      })</p>
-<p>​      .catch(error =&gt;{</p>
-<p>​        console.log(‘Error ‘+ error);</p>
-<p>​        alert(‘Error: ‘ + error); return;</p>
-<p>​       });</p>
-<p>​    }</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/21/%E5%86%99%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/18/%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%8E%B7%E5%8F%96/">服务的获取</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-18</span>
-      <p><p>在遇到服务特性之前一路顺风，在遇到之后一路坎坷。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><!DOCTYPE html>
-
-<html>
-
+<h3 id="服务的获取代码"><a href="#服务的获取代码" class="headerlink" title="服务的获取代码"></a>服务的获取代码</h3><p>`<html></p>
   <head>
 
-<pre><code> &lt;script&gt;
-     function discoverSvcsAndChars()
- {
-     console.log(&quot;discoverSvcsAndChars server=&quot; + connected_server);
-     connected_server.getPrimaryServices()
-     .then(services =&gt;
-     {
-         has_accelerometer_service = false;
-         has_led_service = false;
-         has_device_information_service = false;
-
-         services_discovered = 0;
-         service_count = services.length;
-         console.log(&quot;Got &quot; + service_count + &quot; services&quot;);
-
-         services.forEach(service =&gt;
-         {
-             if (service.uuid == ACCELEROMETER_SERVICE)
-             {
-                 has_accelerometer_service = true;
-             }
-             if(service.uuid == LED_SERVICE)
-             {
-                 has_led_service = true;
-             }
-             if(service.uuid == DEVICE_INFORMATION_SERVICE)
-             {
-                 has_device_information_service = true;
-             }
-             console.log(&apos;Getting Charateristics for service &apos; + service.uuid);
-             service.getCharacteristics()
-             .then(characteristics =&gt;
-             {
-                 console.log(&apos;&gt; Service: &apos; + service.uuid);
-                 services_discovered++;
-                 characteristics_discovered = 0;
-                 characteristic_count = characteristics.length;
-                 characteristics.forEach(characteristic =&gt;
-                 {
-                     characteristics_discovered++;
-                     console.log(&apos;&gt;&gt; Charateristic: &apos; + characteristic.uuid);
-                     if (characteristic.uuid == ACCELEROMETER_DATA)
-                     {
-                         accelerometer_data=characteristic;
-                         has_accelerometer_data = true;
-                     }
-                     if (characteristic.uuid == LED_MATRIX_STATE)
-                     {
-                         led_matrix_state =characteristic;
-                         has_led_matrix_state = true;
-                     }
-                     if (characteristic.uuid == MODEL_NUMBER_STRING)
-                     {
-                         model_number_string = characteristic;
-                         has_model_name_string = true;
-                     }
-                     if (services_discovered == service_count &amp;&amp; characteristics_discovered == characteristic_count)
-                     {
-                         console.log(&quot;FINISHED DISCOVERY&quot;);
-                         setDiscoveryStatus(true);
-
-                     }
-                 });
-             });
-         });
-     });
- }
-
-&lt;/script&gt;</code></pre><meta name="generator" content="Hexo 4.2.0"></head>
-
-<p>​            </p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/18/%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%8E%B7%E5%8F%96/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/17/%E6%89%AB%E6%8F%8F/">扫描</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><body>
-
-<p>​    <h2></p>
-<p>​      Device Discovery<!--扫描/发现蓝牙设备--></p>
-<p>​    </h2></p>
-<p>​    <button id="btn_scan" onclick="discoverDevices()">Start scan</button></p>
-<p>​    <hr></p>
-<p>​    <h2>Status</h2> <!--显示蓝牙状态--></p>
-<table border="1">
-
- <tr>
-
-  <td> <b>Connected</b></td>
-
-  <td><b>Service Discovery Completed</b></td>
-
- </tr><!--表格第一行-->
-
- <tr>
-
-  <td id="Status_connected"> false </td>
-
-  <td id="Status_discovered"> false </td>
-
- </tr><!--表格第二行-->
-
-</table>
-
-<hr>
-
-<!--<h2>Reading and Writing</h2>
-
-<h3>Write Characteristic - Randomise Lights</h3>
-<button id="btn-write" onclick="randomLEDs()">Randomise LEDs</button>
-
-<hr>-->
-
-  </body></p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%89%AB%E6%8F%8F/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/">服务，特性</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><h2 id="服务，特性"><a href="#服务，特性" class="headerlink" title="服务，特性"></a>服务，特性</h2><img src="C:\Users\ASUS\Pictures\QQ图片20200617153720.png" style="zoom:50%;" />
-
-<p><img src="C:%5CUsers%5CASUS%5Cblog%5Csource_posts%5C%E5%9B%BE%E7%89%87%E9%A1%B9%E7%9B%AE%E4%BA%8C.jpg" alt="图片项目二"></p>
-<h2 id="服务的获取"><a href="#服务的获取" class="headerlink" title="服务的获取"></a>服务的获取</h2><img src="C:\Users\ASUS\blog\source\_posts\screenshot_20200618_202231.png" style="zoom:50%;" />
-
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><!DOCTYPE html>
-
-<html>
-
-  <head>
 
   <meta name="generator" content="Hexo 4.2.0"></head>
 
@@ -508,75 +121,81 @@ function setDiscoveryStatus(status)
 
 
 
+<p>`</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/">第二课连接设备</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-17</span>
-      <p><!DOCTYPE html>
+      <h2 class="title"><a href="/2020/06/23/%E5%86%99%E7%89%B9%E6%80%A7%E4%BB%A3%E7%A0%81/">写特性代码</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-23</span>
+      <p><p>读写特性</p>
+<p><img src="C:%5CUsers%5CASUS%5CPictures%5C%E8%AF%BB%E5%86%99.png" alt=""></p>
+<h3 id="写特性代码"><a href="#写特性代码" class="headerlink" title="写特性代码"></a>写特性代码</h3><!DOCTYPE html>
+<html>
+    <head>
+        <script>
+               function randomLEDs()
+        {
+            console.log("randomLEDs");
 
-<html> <!--用于定义文档的头部，描述了文档各种属性和信息-->
+<figure class="highlight plain"><figcaption><span>html&gt;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">      if (!connected)</span><br><span class="line">      &#123;</span><br><span class="line">          alert(&quot;Error: Discover and connect to a device before using this function&quot;);</span><br><span class="line">          return</span><br><span class="line">      &#125;</span><br><span class="line">      if (!services_discovered)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: Service discovery has not yet completed&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_service)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED service&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_matrix_state)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED matrix state characteristic&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">      var led_array &#x3D; [0, 0, 0, 0, 0];</span><br></pre></td></tr></table></figure>
 
-  <head>
-       <script>
-            var selected_device ;   //<!--选择用户选择的蓝牙设备-->
-            var connected_server;  //<!--保存用户选择的蓝牙设备-->
-            var   connected = false;
-            function discoverDevices()
-            {  
-             console.log("discoverDevices");//<!--console，log控制台打印输出-->
-             var options = {acceptAllDevices:true}//发现周边蓝牙设备
-             navigator.bluetooth.requestDevice(options)//navigator对象，包含浏览器信息
-            .then(device => {
-            console.log('> Name:' + device.name);
-            console.log('> Id:' + device.id);  
-            console.log('> Connected:' + device.gatt.connected);
-            selected_device =device;
-            console.log(selected_device);
-            connect();
-            })
-            .catch(error => {
-            alert('ERROR ' + error);
-            console.log('ERROR:' + error);
-             });
-     }
-           function connect()///第二节课添加函数
-     { 
-       console.log("connecting");
-       selected_device.gatt.connect()
-       .then(
-                function(server) //表示连接成功
-                {
-                  console.log("Connected to" + server.device.id);
-                  console.log("Connected=" + server.connected);
-                  //selected_device.addEventListener('gattserverdisconnected',onDisconnected);
 
-<pre><code>             connected_server=server;
-             //discoverSvcsAndChars();//第5节课添加函数
-             //setConnectedStatus(true);//第三节课添加函数,设置电脑蓝牙当前连接状态
-           },
-          function(error)//表示连接失败
-          {
-            console.log(&quot;ERROR:could not connct-&quot; + error);
-            alert(&quot;ERROR:could not connct-&quot; + error);
-            setConnectedStatus(false);
-          }
-         );
-}</code></pre>  <meta name="generator" content="Hexo 4.2.0"></head>
-
-<p>&lt;/ html&gt;</p>
+<p>​<br>              // Math.random():0~1  Math.floor(x):返回小于等于x的最大整数<br>              led_array[0] = Math.floor(Math.random() * 32);<br>led_array[1] = Math.floor(Math.random() * 32);<br>led_array[2] = Math.floor(Math.random() * 32);<br>led_array[3] = Math.floor(Math.random() * 32);<br>led_array[4] = Math.floor(Math.random() * 32);<br>            var led_matrix_data = new Uint8Array(led_array);</p>
+<pre><code>    led_matrix_state.writeValue(led_matrix_data.buffer)
+    .then(_ =&gt; {
+       console.log(&apos;LED matrix state changed&apos;);
+    })
+    .catch(error =&gt;{
+        console.log(&apos;Error &apos;+ error);
+        alert(&apos;Error: &apos; + error); return;
+     });
+}</code></pre><h3 id="读特性"><a href="#读特性" class="headerlink" title="读特性"></a>读特性</h3><!DOCTYPE html>
+<html>
+    <head>
+        <script>
+              function readModelNumber() {
+            console.log("readModelNumber");
+            // state validation
+            if (!connected) {
+                alert("Error: Discover and connect to a device before using this function");
+                return;
+            }
+            if (!services_discovered) {
+                alert("Error: Service discovery has not yet completed");
+                return;
+            }
+            if (!has_device_information_service) {
+                alert("Error: The connected device does not contain the device information service ");
+                return;
+            }
+            if (!has_model_name_string) {
+                alert("Error: The connected device does not contain the model name string  characteristic ");
+                return;
+            }
+            model_number_string.readValue()
+                .then(value => {
+                    data = new Uint8Array(value.buffer);
+                    model_number_string = new TextDecoder("utf-8").decode(data);
+                    console.log(model_number_string);
+                    document.getElementById("model_number").innerHTML =
+                        model_number_string;
+                })
+                .catch(error => {
+                    console.log('Error: ' + error);
+                    alert('Error: ' + error);
+                    return;
+                });
+        }
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/17/%E7%AC%AC%E4%BA%8C%E8%AF%BE%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/23/%E5%86%99%E7%89%B9%E6%80%A7%E4%BB%A3%E7%A0%81/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
 
-<div id="pagination">
-  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"></a>
-</div>
+
 
 <footer>
   <div>
