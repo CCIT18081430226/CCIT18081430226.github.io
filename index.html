@@ -81,117 +81,68 @@
 
   <div class="lx-entry padding">
     <div>
-      <h2 class="title"><a href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/">服务特性</a></h2>
+      <h2 class="title"><a href="/2020/06/23/%E5%8A%A0%E9%80%9F%E8%AE%A1%E4%BB%A3%E7%A0%811/">加速计代码1</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-23</span>
-      <p><h2 id="服务特性"><a href="#服务特性" class="headerlink" title="服务特性"></a>服务特性</h2><img src="C:\Users\ASUS\Pictures\QQ图片20200617153720.png" style="zoom:50%;" />
+      <p><h2 id="加速计代码"><a href="#加速计代码" class="headerlink" title="加速计代码"></a>加速计代码</h2><html>
 
-<h3 id="服务的获取代码"><a href="#服务的获取代码" class="headerlink" title="服务的获取代码"></a>服务的获取代码</h3><p>`<html></p>
-  <head>
+<head>
+<script>
+         function onAccelerometerData(event) {
+console.log("onAccelerometerData");
+buffer = event.target.value.buffer;
+dataview = new DataView(buffer);
+X = dataview.getUint16(0, true);
+Y = dataview.getUint16(2, true);
+Z = dataview.getUint16(4, true);
+console.log("X=" + X + ", Y=" + Y + ", Z+" + Z);
+document.getElementById("accelerometer_data").innerHTML = "X=" + X + ", Y=" + Y + ",Z=" + Z;
+}
+function toggleAccelerometerNotifications() {
+console.log("toggleAccelerometerNotifications");
+if (!connected) {
+alert("Error: Discover and connect to a device before using this function");
+return;
+}
+if (!services_discovered) {
+alert("Error: Service discovery has not yet completed");
+return;
+}
+if (!has_accelerometer_service) {
+alert("Error: The connected device does not contain the accelerometer service");
+return;
+}
+if (!has_accelerometer_data) {
+alert("Error: The connected device does not contain the accelerometer data characteristic");
+return;
+}
+if (!notifications_enabled) {
+accelerometer_data.startNotifications().then(_ => {
+console.log('accelerometer notifications started');
+setNotificationsStatus(true);
+accelerometer_data.addEventListener('characteristicvaluechanged',
+onAccelerometerData);
+})
+.catch(error => {
+console.log('Error: ' + error);
+alert('Error: ' + error);
+return;
+});
+} else {
+accelerometer_data.stopNotifications()
+.then(_ => {
+console.log('accelerometer notifications stopped');
+setNotificationsStatus(false);
 
-
-  <meta name="generator" content="Hexo 4.2.0"></head>
-
-<body>
-
-<p>​    <h2></p>
-<p>​      Status</p>
-<p>​    </h2></p>
-<pre><code>&lt;table border=&quot;1&quot;&gt;</code></pre><p>​      <tr></p>
-<p>​        <td>   <b>Connected</b>    </td></p>
-<p>​        <td>   <b>Service Discovery Completed</b></td></p>
-<p>​      </tr></p>
-<p>​      <tr></p>
-<p>​        <td id="status_connected"> false </td></p>
-<p>​        <td id="status_discovered"> false </td></p>
-<p>​      </tr></p>
-<p>​    </table></p>
-<p>​    <hr></p>
-<p>​    <h2></p>
-<p>​      Device Discovery Or Disconnect</p>
-<p>​    </h2></p>
-<p>​    <button id ="btn_scan" onclick="discoverOrdisconnectDevice()">Start sacn</button></p>
-<p>​    <hr></p>
-<p>​    <h2>Reading and Writing</h2></p>
-<p>​    <h3>Write Charateristic - Randomise Lights</h3></p>
-<p>​    <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button></p>
-<p>​    <hr></p>
-  </body>
-
-</html>
-
-
-
-<p>`</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/06/23/%E5%86%99%E7%89%B9%E6%80%A7%E4%BB%A3%E7%A0%81/">写特性代码</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-23</span>
-      <p><p>读写特性</p>
-<p><img src="C:%5CUsers%5CASUS%5CPictures%5C%E8%AF%BB%E5%86%99.png" alt=""></p>
-<h3 id="写特性代码"><a href="#写特性代码" class="headerlink" title="写特性代码"></a>写特性代码</h3><!DOCTYPE html>
+<p>accelerometer_data.removeEventListener(‘characteristicvaluechanged’,<br>onAccelerometerData);<br>})<br>.catch(error =&gt; {<br>console.log(‘Could not stop accelerometer_data notifications: ‘ + error);<br>});<br>}<br>}</p>
+<!DOCTYPE html>
 <html>
     <head>
         <script>
-               function randomLEDs()
-        {
-            console.log("randomLEDs");
 
-<figure class="highlight plain"><figcaption><span>html&gt;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">      if (!connected)</span><br><span class="line">      &#123;</span><br><span class="line">          alert(&quot;Error: Discover and connect to a device before using this function&quot;);</span><br><span class="line">          return</span><br><span class="line">      &#125;</span><br><span class="line">      if (!services_discovered)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: Service discovery has not yet completed&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_service)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED service&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_matrix_state)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED matrix state characteristic&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">      var led_array &#x3D; [0, 0, 0, 0, 0];</span><br></pre></td></tr></table></figure>
-
-
-<p>​<br>​              // Math.random():0~1  Math.floor(x):返回小于等于x的最大整数<br>​              led_array[0] = Math.floor(Math.random() * 32);<br>led_array[1] = Math.floor(Math.random() * 32);<br>led_array[2] = Math.floor(Math.random() * 32);<br>led_array[3] = Math.floor(Math.random() * 32);<br>led_array[4] = Math.floor(Math.random() * 32);<br>​            var led_matrix_data = new Uint8Array(led_array);</p>
-<pre><code>    led_matrix_state.writeValue(led_matrix_data.buffer)
-    .then(_ =&gt; {
-       console.log(&apos;LED matrix state changed&apos;);
-    })
-    .catch(error =&gt;{
-        console.log(&apos;Error &apos;+ error);
-        alert(&apos;Error: &apos; + error); return;
-     });
-}</code></pre><h3 id="读特性"><a href="#读特性" class="headerlink" title="读特性"></a>读特性</h3><!DOCTYPE html>
-<html>
-    <head>
-        <script>
-              function readModelNumber() {
-            console.log("readModelNumber");
-            // state validation
-            if (!connected) {
-                alert("Error: Discover and connect to a device before using this function");
-                return;
-            }
-            if (!services_discovered) {
-                alert("Error: Service discovery has not yet completed");
-                return;
-            }
-            if (!has_device_information_service) {
-                alert("Error: The connected device does not contain the device information service ");
-                return;
-            }
-            if (!has_model_name_string) {
-                alert("Error: The connected device does not contain the model name string  characteristic ");
-                return;
-            }
-            model_number_string.readValue()
-                .then(value => {
-                    data = new Uint8Array(value.buffer);
-                    model_number_string = new TextDecoder("utf-8").decode(data);
-                    console.log(model_number_string);
-                    document.getElementById("model_number").innerHTML =
-                        model_number_string;
-                })
-                .catch(error => {
-                    console.log('Error: ' + error);
-                    alert('Error: ' + error);
-                    return;
-                });
-        }
-
+<p>​            </p>
+<div id="accelerometer_data"></div>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/06/23/%E5%86%99%E7%89%B9%E6%80%A7%E4%BB%A3%E7%A0%81/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/06/23/%E5%8A%A0%E9%80%9F%E8%AE%A1%E4%BB%A3%E7%A0%811/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -258,6 +209,120 @@ setNotificationsStatus(false);
 <div id="accelerometer_data"></div>
 </p>
       <div class="post-button"><a class="btn" href="/2020/06/23/%E5%8A%A0%E9%80%9F%E8%AE%A1%E4%BB%A3%E7%A0%81/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/">服务特性</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-23</span>
+      <p><h2 id="服务特性"><a href="#服务特性" class="headerlink" title="服务特性"></a>服务特性</h2><img src="C:\Users\ASUS\Pictures\QQ图片20200617153720.png" style="zoom:50%;" />
+
+<h3 id="服务的获取代码"><a href="#服务的获取代码" class="headerlink" title="服务的获取代码"></a>服务的获取代码</h3><p>`<html></p>
+  <head>
+
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<p>​    <h2></p>
+<p>​      Status</p>
+<p>​    </h2></p>
+<pre><code>&lt;table border=&quot;1&quot;&gt;</code></pre><p>​      <tr></p>
+<p>​        <td>   <b>Connected</b>    </td></p>
+<p>​        <td>   <b>Service Discovery Completed</b></td></p>
+<p>​      </tr></p>
+<p>​      <tr></p>
+<p>​        <td id="status_connected"> false </td></p>
+<p>​        <td id="status_discovered"> false </td></p>
+<p>​      </tr></p>
+<p>​    </table></p>
+<p>​    <hr></p>
+<p>​    <h2></p>
+<p>​      Device Discovery Or Disconnect</p>
+<p>​    </h2></p>
+<p>​    <button id ="btn_scan" onclick="discoverOrdisconnectDevice()">Start sacn</button></p>
+<p>​    <hr></p>
+<p>​    <h2>Reading and Writing</h2></p>
+<p>​    <h3>Write Charateristic - Randomise Lights</h3></p>
+<p>​    <button id="btn_write" onclick="randomLEDs()">Randomise LEDs</button></p>
+<p>​    <hr></p>
+  </body>
+
+</html>
+
+
+
+<p>`</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2020/06/23/%E5%86%99%E7%89%B9%E6%80%A7%E4%BB%A3%E7%A0%81/">写特性代码</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-06-23</span>
+      <p><p>读写特性</p>
+<p><img src="C:%5CUsers%5CASUS%5CPictures%5C%E8%AF%BB%E5%86%99.png" alt=""></p>
+<h3 id="写特性代码"><a href="#写特性代码" class="headerlink" title="写特性代码"></a>写特性代码</h3><!DOCTYPE html>
+<html>
+    <head>
+        <script>
+               function randomLEDs()
+        {
+            console.log("randomLEDs");
+
+<figure class="highlight plain"><figcaption><span>html&gt;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">      if (!connected)</span><br><span class="line">      &#123;</span><br><span class="line">          alert(&quot;Error: Discover and connect to a device before using this function&quot;);</span><br><span class="line">          return</span><br><span class="line">      &#125;</span><br><span class="line">      if (!services_discovered)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: Service discovery has not yet completed&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_service)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED service&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_matrix_state)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED matrix state characteristic&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">      var led_array &#x3D; [0, 0, 0, 0, 0];</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>              // Math.random():0~1  Math.floor(x):返回小于等于x的最大整数<br>              led_array[0] = Math.floor(Math.random() * 32);<br>led_array[1] = Math.floor(Math.random() * 32);<br>led_array[2] = Math.floor(Math.random() * 32);<br>led_array[3] = Math.floor(Math.random() * 32);<br>led_array[4] = Math.floor(Math.random() * 32);<br>            var led_matrix_data = new Uint8Array(led_array);</p>
+<pre><code>    led_matrix_state.writeValue(led_matrix_data.buffer)
+    .then(_ =&gt; {
+       console.log(&apos;LED matrix state changed&apos;);
+    })
+    .catch(error =&gt;{
+        console.log(&apos;Error &apos;+ error);
+        alert(&apos;Error: &apos; + error); return;
+     });
+}</code></pre><h3 id="读特性"><a href="#读特性" class="headerlink" title="读特性"></a>读特性</h3><!DOCTYPE html>
+<html>
+    <head>
+        <script>
+              function readModelNumber() {
+            console.log("readModelNumber");
+            // state validation
+            if (!connected) {
+                alert("Error: Discover and connect to a device before using this function");
+                return;
+            }
+            if (!services_discovered) {
+                alert("Error: Service discovery has not yet completed");
+                return;
+            }
+            if (!has_device_information_service) {
+                alert("Error: The connected device does not contain the device information service ");
+                return;
+            }
+            if (!has_model_name_string) {
+                alert("Error: The connected device does not contain the model name string  characteristic ");
+                return;
+            }
+            model_number_string.readValue()
+                .then(value => {
+                    data = new Uint8Array(value.buffer);
+                    model_number_string = new TextDecoder("utf-8").decode(data);
+                    console.log(model_number_string);
+                    document.getElementById("model_number").innerHTML =
+                        model_number_string;
+                })
+                .catch(error => {
+                    console.log('Error: ' + error);
+                    alert('Error: ' + error);
+                    return;
+                });
+        }
+</p>
+      <div class="post-button"><a class="btn" href="/2020/06/23/%E5%86%99%E7%89%B9%E6%80%A7%E4%BB%A3%E7%A0%81/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
