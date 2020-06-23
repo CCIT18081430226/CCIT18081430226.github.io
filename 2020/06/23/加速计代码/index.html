@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>Archives | Hexo</title>
+  <title>加速计代码 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="北音执念">
   <meta name="keywords" content="">
@@ -62,35 +62,118 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
 <meta name="generator" content="Hexo 4.2.0"></head>
 <body>
+<div class="single">
 
 <div id="page">
-
-<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/cover.jpeg)">
+<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/post_cover.jpeg)" data-stellar-background-ratio="0.5">
   <div class="overlay">
-  <div class="featured">
+  <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
-    <span>北音执念</span>
-    <h1>Hexo</h1>
-    <span>——记录生活</span>
+    <span>2020-06-23</span>
+    <h2>加速计代码</h2>
     
-  </div>
-  </div>
+    </div>
+</div>
 </div>
 
 <div id="lx-main-content">
   <div class="lx-post">
-  <h2 class="pagehead">Archives</h2>
-    <div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-06-23</span>
-    <h2 class="title"><a href="/2020/06/23/%E5%8A%A0%E9%80%9F%E8%AE%A1%E4%BB%A3%E7%A0%81/">加速计代码</a></h2>
-    <p></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-06-23</span>
-    <h2 class="title"><a href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/">服务特性</a></h2>
-    <p></p></div></div><div class="lx-entry padding"><div>
-    <span class="lx-post-detail">2020-06-23</span>
-    <h2 class="title"><a href="/2020/06/23/%E5%86%99%E7%89%B9%E6%80%A7%E4%BB%A3%E7%A0%81/">写特性代码</a></h2>
-    <p></p></div></div>
+    <div class="lx-entry padding">
+      <div>
+        <h2 id="加速计代码"><a href="#加速计代码" class="headerlink" title="加速计代码"></a>加速计代码</h2><html>
 
+<head>
+<script>
+         function onAccelerometerData(event) {
+console.log("onAccelerometerData");
+buffer = event.target.value.buffer;
+dataview = new DataView(buffer);
+X = dataview.getUint16(0, true);
+Y = dataview.getUint16(2, true);
+Z = dataview.getUint16(4, true);
+console.log("X=" + X + ", Y=" + Y + ", Z+" + Z);
+document.getElementById("accelerometer_data").innerHTML = "X=" + X + ", Y=" + Y + ",Z=" + Z;
+}
+function toggleAccelerometerNotifications() {
+console.log("toggleAccelerometerNotifications");
+if (!connected) {
+alert("Error: Discover and connect to a device before using this function");
+return;
+}
+if (!services_discovered) {
+alert("Error: Service discovery has not yet completed");
+return;
+}
+if (!has_accelerometer_service) {
+alert("Error: The connected device does not contain the accelerometer service");
+return;
+}
+if (!has_accelerometer_data) {
+alert("Error: The connected device does not contain the accelerometer data characteristic");
+return;
+}
+if (!notifications_enabled) {
+accelerometer_data.startNotifications().then(_ => {
+console.log('accelerometer notifications started');
+setNotificationsStatus(true);
+accelerometer_data.addEventListener('characteristicvaluechanged',
+onAccelerometerData);
+})
+.catch(error => {
+console.log('Error: ' + error);
+alert('Error: ' + error);
+return;
+});
+} else {
+accelerometer_data.stopNotifications()
+.then(_ => {
+console.log('accelerometer notifications stopped');
+setNotificationsStatus(false);
+
+<p>accelerometer_data.removeEventListener(‘characteristicvaluechanged’,<br>onAccelerometerData);<br>})<br>.catch(error =&gt; {<br>console.log(‘Could not stop accelerometer_data notifications: ‘ + error);<br>});<br>}<br>}</p>
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+
+<p>​            </p>
+<div id="accelerometer_data"></div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/06/23/%E6%9C%8D%E5%8A%A1%E7%89%B9%E6%80%A7/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>服务特性</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
 
 <footer>
   <div>
@@ -98,8 +181,6 @@
   </div>
 </footer>
 
-  </div>
-</div>
 </div>
 
 <button class="hamburger hamburger--arrow-r" type="button">
