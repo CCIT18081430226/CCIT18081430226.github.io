@@ -93,7 +93,7 @@
 <figure class="highlight plain"><figcaption><span>html&gt;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">      if (!connected)</span><br><span class="line">      &#123;</span><br><span class="line">          alert(&quot;Error: Discover and connect to a device before using this function&quot;);</span><br><span class="line">          return</span><br><span class="line">      &#125;</span><br><span class="line">      if (!services_discovered)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: Service discovery has not yet completed&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_service)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED service&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">  if (!has_led_matrix_state)</span><br><span class="line">&#123;</span><br><span class="line">	   alert(&quot;Error: The connected device does not contain the LED matrix state characteristic&quot;);</span><br><span class="line">	   return;</span><br><span class="line">&#125;</span><br><span class="line">      var led_array &#x3D; [0, 0, 0, 0, 0];</span><br></pre></td></tr></table></figure>
 
 
-<p>​<br>              // Math.random():0~1  Math.floor(x):返回小于等于x的最大整数<br>              led_array[0] = Math.floor(Math.random() * 32);<br>led_array[1] = Math.floor(Math.random() * 32);<br>led_array[2] = Math.floor(Math.random() * 32);<br>led_array[3] = Math.floor(Math.random() * 32);<br>led_array[4] = Math.floor(Math.random() * 32);<br>            var led_matrix_data = new Uint8Array(led_array);</p>
+<p>​<br>​              // Math.random():0~1  Math.floor(x):返回小于等于x的最大整数<br>​              led_array[0] = Math.floor(Math.random() * 32);<br>led_array[1] = Math.floor(Math.random() * 32);<br>led_array[2] = Math.floor(Math.random() * 32);<br>led_array[3] = Math.floor(Math.random() * 32);<br>led_array[4] = Math.floor(Math.random() * 32);<br>​            var led_matrix_data = new Uint8Array(led_array);</p>
 <pre><code>    led_matrix_state.writeValue(led_matrix_data.buffer)
     .then(_ =&gt; {
        console.log(&apos;LED matrix state changed&apos;);
@@ -140,6 +140,7 @@
                 });
         }
 
+
       </div>
     </div>
   </div>
@@ -160,12 +161,12 @@
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="#">
+		<a class="copy" href="/2020/06/23/%E5%8A%A0%E9%80%9F%E8%AE%A1%E4%BB%A3%E7%A0%81/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>No older post</h3>
+						<h3>加速计代码</h3>
 					</div>
 				</div>
 			</div>
